@@ -2,7 +2,10 @@
 
 株式会社MR.クリーンラボのコーポレートサイト（静的HTML/CSS/JS）。
 提供されたスクリーンショットを元に内容を再現し、納品レベルへフルデザインしたものです。
-画像は外部ネット制限・ライセンスの都合により**すべてオリジナルSVGイラスト**で制作しています。
+
+**デザインテーマ：ダーク／エディトリアル**（漆黒ベース＋ライムのアクセント、ノイズ質感、
+特大タイポgrafィ、マーキー、ヘアライン罫線）。装飾はCSSとインラインSVGで構成し、
+重い画像に依存しません。
 
 > サイト所有者の許諾のもと、改修作業用に制作・公開しています。
 
@@ -30,8 +33,8 @@ https://playmark0227-svg.github.io/MR-creanLAB/
 - **ビルド不要**の静的サイト。ブラウザで `index.html` を開くだけで確認可。
 - `css/style.css` … デザインシステム（配色・余白・角丸・影をすべて `:root` 変数化）。
 - `js/main.js` … モバイルメニュー / FAQアコーディオン / スクロール出現 / ページトップ（依存なし）。
-- `images/*.svg` … オリジナルSVGイラスト一式（`images/README.md` 参照）。
-- フォント … Google Fonts（Noto Sans JP / Zen Kaku Gothic New / Poppins）。
+- `images/*.svg` … ロゴ・favicon（その他の装飾はCSS／インラインSVG。`images/README.md` 参照）。
+- フォント … Google Fonts（Space Grotesk / Space Mono / Zen Kaku Gothic New / Noto Sans JP）。
 - SEO … 各ページ `title` / `description` / OGP、`favicon.svg`、`robots.txt`、`sitemap.xml`。
 - レスポンシブ・アクセシビリティ（`prefers-reduced-motion`、フォーカスリング、`alt`）対応。
 
@@ -47,14 +50,16 @@ python3 -m http.server 8000   # → http://localhost:8000/
 
 | 用途 | 変数 | 値 |
 |---|---|---|
-| 濃紺（ヒーロー・見出し） | `--navy` | `#0c2a5e` |
-| プライマリブルー | `--blue` | `#1668d8` |
-| アクセント（シアン） | `--cyan` | `#16b6c9` |
-| CTAオレンジ | `--orange` | `#ff7a1a` |
+| 背景（漆黒） | `--bg` | `#08090b` |
+| カード面 | `--surface` | `#101216` |
+| テキスト | `--text` | `#f3f4f6` |
+| アクセント（ライム） | `--acc` | `#c8f24a` |
+
+> 差し色を変えたい場合は `--acc` の1行を変更するだけで全体に反映されます。
 
 ## 納品前に差し替え・確認したい項目
 
-1. **画像** … オリジナルSVGで完成済み。御社スタッフ・施工写真に差し替えると更に効果的（`images/README.md` 参照）。
+1. **写真** … `.media` 枠にプレースホルダを使用。御社スタッフ・施工写真を入れると更に効果的（`images/README.md` 参照）。
 2. **お問い合わせフォーム** … 現在はデモ。実際の送信先（メール／フォームサービス）への接続が必要。
 3. **アクセスマップ** … `company.html` の地図枠を Google マップ埋め込みに置き換え。
 4. **お客様の声・FAQ回答** … スクショで読み取れない部分はサンプル文。実内容に差し替え推奨（該当箇所に注記あり）。
