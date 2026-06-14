@@ -6,13 +6,18 @@
 (function () {
   "use strict";
 
-  /* ---- Header shadow on scroll + pagetop ---- */
+  /* ---- Header shadow on scroll + pagetop + progress ---- */
   var header = document.querySelector(".site-header");
   var pagetop = document.querySelector(".pagetop");
+  var progress = document.querySelector(".progress");
   function onScroll() {
     var y = window.scrollY || window.pageYOffset;
     if (header) header.classList.toggle("is-scrolled", y > 8);
     if (pagetop) pagetop.classList.toggle("is-visible", y > 600);
+    if (progress) {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+    }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
