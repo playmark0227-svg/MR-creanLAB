@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="お客様">
+  <circle cx="48" cy="48" r="48" fill="#e3f7fa"/>
+  <circle cx="48" cy="46" r="23" fill="#f3c19c"/>
+  <path d="M26 42c2-13 11-20 22-20s20 7 22 20c-4-3-8-4-12-4-2 4-18 4-20 0-4 0-8 1-12 4Z" fill="#6b6b6b"/>
+  <circle cx="40" cy="46" r="3.2" fill="#2c3a4f"/><circle cx="56" cy="46" r="3.2" fill="#2c3a4f"/>
+  <path d="M34 39c3-2 7-2 9 0M53 39c3-2 7-2 9 0" fill="none" stroke="#6b6b6b" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M42 56c3 2.5 9 2.5 12 0" fill="none" stroke="#b07a4e" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M22 96c2-15 13-24 26-24s24 9 26 24Z" fill="#0c2a5e"/>
+</svg>

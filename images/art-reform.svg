@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" role="img" aria-label="リフォーム・ハウスクリーニングのイラスト">
+  <defs>
+    <linearGradient id="arRoof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a8bff"/><stop offset="1" stop-color="#1257b8"/></linearGradient>
+    <linearGradient id="arDisc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9f3ff"/><stop offset="1" stop-color="#d7eefc"/></linearGradient>
+    <filter id="arSh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0c2a5e" flood-opacity="0.16"/></filter>
+  </defs>
+  <circle cx="260" cy="230" r="188" fill="url(#arDisc)"/>
+  <circle cx="260" cy="230" r="188" fill="none" stroke="#bfe0f7" stroke-opacity=".6" stroke-dasharray="3 12" stroke-width="3"/>
+
+  <!-- house -->
+  <g filter="url(#arSh)">
+    <rect x="176" y="226" width="168" height="132" rx="10" fill="#fff"/>
+    <path d="M260 132l108 96H152Z" fill="url(#arRoof)"/>
+    <path d="M260 132l108 96h-54L260 132Z" fill="#0c2a5e" opacity=".12"/>
+    <rect x="206" y="262" width="44" height="44" rx="6" fill="#cfe6fb"/>
+    <path d="M228 262v44M206 284h44" stroke="#9cc8ee" stroke-width="3"/>
+    <rect x="280" y="276" width="40" height="82" rx="6" fill="#1668d8"/>
+    <circle cx="312" cy="318" r="4" fill="#cfe6fb"/>
+  </g>
+
+  <!-- paint roller -->
+  <g filter="url(#arSh)" transform="rotate(18 360 150)">
+    <rect x="330" y="120" width="64" height="26" rx="8" fill="#ff7a1a"/>
+    <rect x="330" y="120" width="64" height="9" rx="4" fill="#ffa45e"/>
+    <rect x="322" y="128" width="12" height="10" fill="#0c2a5e"/>
+    <path d="M328 133h-14v40" fill="none" stroke="#0c2a5e" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- tools chip -->
+  <g filter="url(#arSh)">
+    <circle cx="96" cy="180" r="42" fill="#fff"/>
+    <path d="M86 162a12 12 0 0 0 14 18l18 18 8-8-18-18a12 12 0 0 0-18-14l9 9-5 5-8-8Z" fill="#1668d8"/>
+  </g>
+  <!-- sparkle clean chip -->
+  <g filter="url(#arSh)">
+    <circle cx="96" cy="330" r="38" fill="#fff"/>
+    <path d="M96 308l5 13 13 5-13 5-5 13-5-13-13-5 13-5Z" fill="#16b6c9"/>
+  </g>
+  <g filter="url(#arSh)">
+    <circle cx="430" cy="330" r="40" fill="#fff"/>
+    <path d="M412 330l11 11 22-22" fill="none" stroke="#13b07e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g fill="#ffb020"><path d="M268 70l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/></g>
+  <g fill="#16b6c9"><circle cx="412" cy="232" r="5"/><circle cx="150" cy="250" r="5"/></g>
+</svg>

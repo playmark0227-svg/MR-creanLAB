@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="お客様">
+  <circle cx="48" cy="48" r="48" fill="#fff1e6"/>
+  <path d="M22 50c0-16 12-28 26-28s26 12 26 28c0 6-2 14-4 20l-6-6c2-6 2-12 0-16-6 4-26 4-32 0-2 4-2 10 0 16l-6 6c-2-6-4-14-4-20Z" fill="#5a3b2a"/>
+  <circle cx="48" cy="46" r="23" fill="#f7c9a3"/>
+  <circle cx="40" cy="46" r="3.2" fill="#2c3a4f"/><circle cx="56" cy="46" r="3.2" fill="#2c3a4f"/>
+  <circle cx="35" cy="52" r="4" fill="#f4a98a" opacity=".55"/><circle cx="61" cy="52" r="4" fill="#f4a98a" opacity=".55"/>
+  <path d="M42 56c3 3 9 3 12 0" fill="none" stroke="#b07a4e" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M22 96c2-15 13-24 26-24s24 9 26 24Z" fill="#16b6c9"/>
+</svg>

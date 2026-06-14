@@ -2,28 +2,25 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ｜株式会社MR.クリーンラボ</title>
-  <meta name="description" content="株式会社MR.クリーンラボへのお問い合わせ。害虫害獣駆除・排水管洗浄・リフォーム・ハウスクリーニングのご相談・お見積りは無料です。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>お問い合わせ｜株式会社MR.クリーンラボ（札幌）</title>
+  <meta name="description" content="株式会社MR.クリーンラボへのお問い合わせ。害虫害獣駆除・排水管洗浄・リフォーム・ハウスクリーニングのご相談・お見積り・現地調査は無料です。">
+  <meta name="theme-color" content="#0c2a5e">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="top">
 
-  <!-- ===== ヘッダー（全ページ共通） ===== -->
+  <!-- ============ HEADER ============ -->
   <header class="site-header">
-    <div class="container header-top">
-      <a class="logo" href="index.html">
-        <span class="logo-mark">MR</span>
-        <span class="logo-text">MR.Clean Lab</span>
-      </a>
-      <div class="header-actions">
-        <a class="tel-btn" href="tel:011-252-7865">&#9742; 011-252-7865</a>
-        <a class="btn-contact" href="contact.html">お問い合わせ</a>
-      </div>
-    </div>
-    <nav class="global-nav">
-      <div class="container">
-        <ul>
+    <div class="container header-bar">
+      <a class="logo" href="index.html"><img src="images/logo.svg" alt="MR.Clean Lab" width="214" height="48"></a>
+      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="globalNav"><span></span><span></span><span></span></button>
+      <nav class="global-nav" id="globalNav">
+        <ul class="nav-list">
           <li><a href="index.html">ホーム</a></li>
           <li><a href="pest-control.html">害虫害獣<small>駆除・防除</small></a></li>
           <li><a href="drainage.html">排水管洗浄<small>グリーストラップ清掃</small></a></li>
@@ -31,83 +28,101 @@
           <li><a href="news.html">お知らせ</a></li>
           <li><a href="company.html">会社概要</a></li>
         </ul>
-      </div>
-    </nav>
-  </header>
-
-  <!-- ===== ページ見出し ===== -->
-  <section class="page-hero">
-    <h1 class="en">Contact</h1>
-    <p class="ja">お問い合わせ</p>
-  </section>
-
-  <!-- ※ お問い合わせページはスクショ未取得のため、一般的な構成で仮作成しています。
-       実際のフォーム項目・文言は本サイトに合わせて差し替えてください。 -->
-  <section class="section">
-    <div class="container">
-      <p class="section-lead">ご相談・お見積り・現地調査は無料です。お電話（011-252-7865）または下記フォームよりお気軽にお問い合わせください。</p>
-
-      <form class="form" action="#" method="post" onsubmit="return false;">
-        <div class="row">
-          <label for="name">お名前<span class="req">必須</span></label>
-          <input type="text" id="name" name="name" required>
+        <div class="header-cta">
+          <a class="tel-link" href="tel:01125227865"><span class="num"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</span><span class="cap">受付 9:00–18:00</span></a>
+          <a class="btn btn--primary" href="contact.html">お問い合わせ</a>
         </div>
-        <div class="row">
-          <label for="company">会社名・団体名</label>
-          <input type="text" id="company" name="company">
-        </div>
-        <div class="row">
-          <label for="tel">電話番号<span class="req">必須</span></label>
-          <input type="tel" id="tel" name="tel" required>
-        </div>
-        <div class="row">
-          <label for="email">メールアドレス<span class="req">必須</span></label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="row">
-          <label for="category">お問い合わせ内容</label>
-          <select id="category" name="category">
-            <option value="">選択してください</option>
-            <option>害虫害獣 駆除・防除</option>
-            <option>排水管洗浄・グリーストラップ清掃</option>
-            <option>リフォーム・ハウスクリーニング</option>
-            <option>その他</option>
-          </select>
-        </div>
-        <div class="row">
-          <label for="message">お問い合わせ詳細<span class="req">必須</span></label>
-          <textarea id="message" name="message" rows="6" required></textarea>
-        </div>
-        <div class="submit">
-          <button type="submit">送信する</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- ===== フッター（全ページ共通） ===== -->
-  <footer class="site-footer">
-    <div class="container footer-cols">
-      <div class="footer-company">
-        <p class="name">株式会社・エムアールクリーンラボ</p>
-        <p>〒062-0035<br>北海道札幌市豊平区西岡五条13丁目1番20号</p>
-      </div>
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="index.html">ホーム</a></li>
-          <li><a href="pest-control.html">害虫害獣 駆除・防除</a></li>
-          <li><a href="drainage.html">排水管洗浄・グリーストラップ清掃</a></li>
-          <li><a href="reform.html">リフォーム・ハウスクリーニング</a></li>
-        </ul>
-        <ul>
-          <li><a href="company.html">会社概要</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
-          <li><a href="news.html">お知らせ</a></li>
-        </ul>
       </nav>
     </div>
-    <p class="copyright">Copyright(C) 2023 MR.Clean Lab. All rights reserved.</p>
+  </header>
+
+  <!-- ============ PAGE HEAD ============ -->
+  <section class="page-head">
+    <p class="page-head__en">Contact</p>
+    <p class="page-head__ja">お問い合わせ</p>
+    <p class="crumbs"><a href="index.html">ホーム</a> ／ お問い合わせ</p>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal" style="max-width:720px">
+        <span class="eyebrow">Get in touch</span>
+        <h2 class="section-title">お気軽にご相談ください</h2>
+        <p class="section-lead">ご相談・お見積り・現地調査はすべて無料です。お電話または下記フォームよりお問い合わせください。</p>
+      </div>
+
+      <div class="split" style="grid-template-columns:1.35fr .85fr;align-items:start">
+        <!-- form -->
+        <form class="form reveal" action="#" method="post" onsubmit="return false;">
+          <div class="form__row">
+            <label for="name">お名前<span class="req">必須</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form__row">
+            <label for="company">会社名・団体名<span class="opt">任意</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization">
+          </div>
+          <div class="form__row">
+            <label for="tel">電話番号<span class="req">必須</span></label>
+            <input type="tel" id="tel" name="tel" autocomplete="tel" required>
+          </div>
+          <div class="form__row">
+            <label for="email">メールアドレス<span class="req">必須</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form__row">
+            <label for="category">お問い合わせ内容<span class="opt">任意</span></label>
+            <select id="category" name="category">
+              <option value="">選択してください</option>
+              <option>害虫害獣 駆除・防除</option>
+              <option>排水管洗浄・グリーストラップ清掃</option>
+              <option>リフォーム・ハウスクリーニング</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label for="message">お問い合わせ詳細<span class="req">必須</span></label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <div class="form__submit">
+            <button type="submit" class="btn btn--primary btn--lg">この内容で送信する</button>
+            <p class="form__note">※ 現在はデモ表示です。実際の送信先（メール／フォームサービス）に接続してご利用ください。</p>
+          </div>
+        </form>
+
+        <!-- aside -->
+        <aside class="contact-aside reveal" data-delay="1">
+          <div class="contact-card">
+            <p style="font-family:var(--font-en);letter-spacing:.1em;font-size:13px;color:#8fe3ef;margin-bottom:6px">TEL</p>
+            <a class="num" href="tel:01125227865" style="color:#fff"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</a>
+            <p class="cap" style="margin-top:6px">受付時間 9:00〜18:00</p>
+          </div>
+          <div class="profile" style="box-shadow:none">
+            <dl><dt>所在地</dt><dd>〒062-0035<br>札幌市豊平区西岡五条13丁目1番20号</dd></dl>
+            <dl><dt>対応エリア</dt><dd>札幌市内および近郊町村<br>（札幌・函館・旭川・帯広・釧路）</dd></dl>
+            <dl><dt>無料対応</dt><dd>ご相談・お見積り・現地調査</dd></dl>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <img src="images/logo-white.svg" alt="MR.Clean Lab" width="214" height="48">
+        <p>株式会社・エムアールクリーンラボ<br>〒062-0035 北海道札幌市豊平区西岡五条13丁目1番20号</p>
+        <a class="f-tel" href="tel:01125227865"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</a>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="pest-control.html">害虫害獣 駆除・防除</a></li><li><a href="drainage.html">排水管洗浄・グリーストラップ清掃</a></li><li><a href="reform.html">リフォーム・ハウスクリーニング</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="company.html">会社概要</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">Copyright &copy; <span data-year>2024</span> MR.Clean Lab. All rights reserved.</div>
   </footer>
 
+  <a class="pagetop" href="#top" aria-label="ページ上部へ戻る"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

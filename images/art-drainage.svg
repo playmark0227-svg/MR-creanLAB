@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" role="img" aria-label="排水管洗浄・グリーストラップ清掃のイラスト">
+  <defs>
+    <linearGradient id="adPipe" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a8bff"/><stop offset="1" stop-color="#1257b8"/></linearGradient>
+    <linearGradient id="adDisc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f6f9"/><stop offset="1" stop-color="#d7eefc"/></linearGradient>
+    <filter id="adSh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0c2a5e" flood-opacity="0.16"/></filter>
+  </defs>
+  <circle cx="260" cy="230" r="188" fill="url(#adDisc)"/>
+  <circle cx="260" cy="230" r="188" fill="none" stroke="#bfe0f7" stroke-opacity=".6" stroke-dasharray="3 12" stroke-width="3"/>
+
+  <!-- pipe (elbow) -->
+  <g filter="url(#adSh)">
+    <path d="M196 132v92a76 76 0 0 0 76 76h60" fill="none" stroke="url(#adPipe)" stroke-width="56" stroke-linecap="round"/>
+    <path d="M196 132v92a76 76 0 0 0 76 76h60" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="18" stroke-linecap="round"/>
+  </g>
+  <!-- pipe flanges -->
+  <rect x="168" y="120" width="56" height="20" rx="6" fill="#0c2a5e"/>
+  <rect x="324" y="284" width="20" height="56" rx="6" fill="#0c2a5e"/>
+
+  <!-- water gush -->
+  <g fill="#16b6c9">
+    <path d="M196 96c6 9 9 13 9 17a9 9 0 1 1-18 0c0-4 3-8 9-17Z"/>
+    <circle cx="170" cy="86" r="6" opacity=".8"/><circle cx="224" cy="80" r="5" opacity=".7"/>
+    <circle cx="150" cy="108" r="4" opacity=".6"/>
+  </g>
+  <g fill="#16b6c9">
+    <path d="M372 312c5 8 8 11 8 15a8 8 0 1 1-16 0c0-4 3-7 8-15Z"/>
+    <circle cx="400" cy="300" r="6" opacity=".8"/><circle cx="416" cy="320" r="4" opacity=".6"/>
+  </g>
+
+  <!-- sparkles of clean -->
+  <g filter="url(#adSh)">
+    <circle cx="416" cy="150" r="42" fill="#fff"/>
+    <path d="M398 150l11 11 22-22" fill="none" stroke="#13b07e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g filter="url(#adSh)">
+    <circle cx="92" cy="300" r="40" fill="#fff"/>
+    <!-- high pressure nozzle -->
+    <rect x="74" y="292" width="34" height="14" rx="4" fill="#1668d8"/>
+    <rect x="68" y="296" width="10" height="6" fill="#1668d8"/>
+    <path d="M108 299l16-3M108 299l15 6M108 299l14-10" stroke="#16b6c9" stroke-width="3.4" stroke-linecap="round"/>
+  </g>
+
+  <g fill="#ffb020"><path d="M268 60l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/></g>
+  <g fill="#16b6c9"><circle cx="150" cy="200" r="5"/><circle cx="372" cy="392" r="6"/></g>
+</svg>
