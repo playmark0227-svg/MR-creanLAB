@@ -3,8 +3,8 @@
 株式会社MR.クリーンラボのコーポレートサイト（静的HTML/CSS/JS）。
 提供されたスクリーンショットを元に内容を再現し、納品レベルへフルデザインしたものです。
 
-**デザインテーマ：クリーン／ランディング**（白基調の清潔感 × フレッシュなティールのアクセント ×
-要所に濃いインクの締めセクション）。視線をCTAへ集めるLP構成・スクロール進捗バー・モバイル固定CTAバー付き。
+**デザインテーマ：ダーク・エディトリアル／ミニマル**（黒基調 × 明朝体の上質感 × 大胆な余白 ×
+ヘアラインと大きなインデックス番号による非対称レイアウト）。アクセントはクリーンなミントを要所のみ。
 装飾はCSSとインラインSVGで構成し、重い画像に依存しません。
 
 > サイト所有者の許諾のもと、改修作業用に制作・公開しています。
@@ -34,7 +34,7 @@ https://playmark0227-svg.github.io/MR-creanLAB/
 - `css/style.css` … デザインシステム（配色・余白・角丸・影をすべて `:root` 変数化）。
 - `js/main.js` … モバイルメニュー / FAQアコーディオン / スクロール出現 / ページトップ（依存なし）。
 - `images/*.svg` … ロゴ・favicon（その他の装飾はCSS／インラインSVG。`images/README.md` 参照）。
-- フォント … Google Fonts（Space Grotesk / Space Mono / Zen Kaku Gothic New / Noto Sans JP）。
+- フォント … Google Fonts（Shippori Mincho〔見出し・数字〕／ Zen Kaku Gothic New ／ Noto Sans JP ／ Space Grotesk〔英字ラベル〕）。
 - SEO … 各ページ `title` / `description` / OGP、`favicon.svg`、`robots.txt`、`sitemap.xml`。
 - レスポンシブ・アクセシビリティ（`prefers-reduced-motion`、フォーカスリング、`alt`）対応。
 
@@ -50,10 +50,10 @@ python3 -m http.server 8000   # → http://localhost:8000/
 
 | 用途 | 変数 | 値 |
 |---|---|---|
-| 背景（白） | `--bg` | `#ffffff` |
-| 淡い背景 | `--bg-soft` | `#f4f8fa` |
-| インク（見出し・暗セクション） | `--ink` | `#0e1a27` |
-| アクセント（ティール） | `--acc` | `#0bb3a6` |
+| 背景（黒） | `--bg` | `#0b0b0c` |
+| パネル面 | `--panel` | `#141417` |
+| テキスト（オフホワイト） | `--fg` | `#f4f2ec` |
+| アクセント（ミント） | `--acc` | `#8fe6cf` |
 
 > 差し色を変えたい場合は `--acc` の1行を変更するだけで全体に反映されます。
 
