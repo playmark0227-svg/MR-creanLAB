@@ -565,7 +565,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* アップロードしたロゴ画像（あれば差し替え／無ければテキストロゴ表示） */
-.logo-img{ height: 44px; width: auto; max-width: 230px; display: block; }
+.logo-img{ height: 56px; width: auto; max-width: 220px; display: block; }
 .logo:not(.no-img) .logo-mark,
 .logo:not(.no-img) .logo-text { display: none; }
-@media (max-width: 560px){ .logo-img{ height: 36px; } }
+@media (max-width: 560px){ .logo-img{ height: 44px; } }
