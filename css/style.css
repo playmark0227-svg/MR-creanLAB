@@ -6,16 +6,18 @@
    ========================================================= */
 
 :root{
-  --bg:#0b0b0c;
-  --bg-2:#0f0f11;
-  --panel:#141417;
-  --line:rgba(244,242,236,.14);
-  --line-soft:rgba(244,242,236,.07);
-  --fg:#f4f2ec;          /* 温かみのあるオフホワイト */
-  --fg-2:#a6a59f;
-  --fg-3:#6c6b66;
-  --acc:#8fe6cf;         /* clean mint（要所のみ） */
-  --acc-deep:#57c7ab;
+  --bg:#0a0d14;          /* 濃紺寄りの黒（元サイトのブルー基調を反映） */
+  --bg-2:#0d1119;
+  --panel:#121826;
+  --line:rgba(200,216,255,.14);
+  --line-soft:rgba(200,216,255,.07);
+  --fg:#eef1f7;          /* クールなオフホワイト */
+  --fg-2:#9fb0c6;
+  --fg-3:#65748c;
+  --acc:#4f9bff;         /* brand blue（リンク・番号・ライン・強調） */
+  --acc-deep:#74b2ff;    /* 小ラベル用の明るいブルー */
+  --cta:#f5871f;         /* brand orange（CTAボタン） */
+  --cta-2:#ff9a3c;
 
   --container:1280px;
   --gutter:28px;
@@ -35,7 +37,7 @@ img,svg{ display:block; max-width:100%; height:auto; }
 a{ color:inherit; text-decoration:none; }
 ul,ol{ list-style:none; padding:0; }
 button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
-::selection{ background:var(--acc); color:#08110e; }
+::selection{ background:var(--acc); color:#fff; }
 :focus-visible{ outline:1px solid var(--acc); outline-offset:4px; }
 .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0; }
 
@@ -58,8 +60,8 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 
 /* ---- buttons ---- */
 .btn{ display:inline-flex; align-items:center; gap:.7em; font-family:var(--f-jp); font-weight:700; font-size:15px; transition:gap .3s var(--ease), color .25s, background .25s, border-color .25s, transform .25s var(--ease); }
-.btn--solid{ background:var(--fg); color:#0b0b0c; padding:16px 30px; border-radius:2px; }
-.btn--solid:hover{ background:var(--acc); transform:translateY(-2px); }
+.btn--solid{ background:var(--cta); color:#fff; padding:16px 30px; border-radius:2px; }
+.btn--solid:hover{ background:var(--cta-2); transform:translateY(-2px); }
 .btn--line{ border:1px solid var(--line); color:var(--fg); padding:16px 30px; border-radius:2px; }
 .btn--line:hover{ border-color:var(--acc); color:var(--acc); }
 .btn--lg{ padding:19px 38px; font-size:16px; }
@@ -231,7 +233,7 @@ a.news__item:hover .news__title{ color:var(--acc); }
 .form-grid{ display:grid; grid-template-columns:1.5fr .8fr; gap:clamp(32px,5vw,64px); align-items:start; }
 .form .row{ margin-bottom:26px; }
 .form label{ display:block; font-family:var(--f-en); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--fg-2); margin-bottom:12px; }
-.req{ color:#08110e; background:var(--acc); font-size:9px; font-weight:700; padding:2px 7px; margin-left:8px; letter-spacing:.05em; }
+.req{ color:#fff; background:var(--acc); font-size:9px; font-weight:700; padding:2px 7px; margin-left:8px; letter-spacing:.05em; }
 .opt{ color:var(--fg-3); border:1px solid var(--line); font-size:9px; padding:2px 7px; margin-left:8px; }
 .form input,.form select,.form textarea{ width:100%; padding:15px 0; background:transparent; border:0; border-bottom:1px solid var(--line); color:var(--fg); font:inherit; transition:border-color .25s; }
 .form input::placeholder,.form textarea::placeholder{ color:var(--fg-3); }
@@ -266,7 +268,7 @@ a.news__item:hover .news__title{ color:var(--acc); }
 .mcta a{ flex:1; display:flex; align-items:center; justify-content:center; gap:.4em; padding:15px; font-family:var(--f-jp); font-weight:700; font-size:14.5px; }
 .mcta .tel{ background:var(--bg-2); color:var(--fg); }
 .mcta .tel svg{ width:17px; height:17px; color:var(--acc); }
-.mcta .req{ background:var(--fg); color:#0b0b0c; }
+.mcta .req{ background:var(--cta); color:#fff; }
 
 .pagetop{ position:fixed; right:20px; bottom:20px; width:46px; height:46px; border:1px solid var(--line); border-radius:2px; display:grid; place-items:center; background:rgba(11,11,12,.7); backdrop-filter:blur(8px); color:var(--fg); opacity:0; visibility:hidden; transform:translateY(8px); transition:all .3s var(--ease); z-index:90; }
 .pagetop.is-visible{ opacity:1; visibility:visible; transform:translateY(0); }
