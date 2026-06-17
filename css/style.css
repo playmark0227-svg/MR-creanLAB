@@ -60,6 +60,11 @@ a:hover { text-decoration: underline; }
   border-radius: var(--radius);
   min-height: 120px;
 }
+/* 写真を入れたら .ph を覆う（無ければプレースホルダ表示のまま） */
+.ph { position: relative; overflow: hidden; }
+.ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .ph { min-height: clamp(220px, 36vw, 400px); }
+.service-card .ph, .voice-card .ph { min-height: 168px; }
 
 /* =========================================================
    ヘッダー
