@@ -569,3 +569,84 @@ a:hover { text-decoration: underline; }
 .logo:not(.no-img) .logo-mark,
 .logo:not(.no-img) .logo-text { display: none; }
 @media (max-width: 560px){ .logo-img{ height: 44px; } }
+
+/* =========================================================
+   v2 品質向上レイヤー
+   ========================================================= */
+html{ scroll-padding-top: 92px; }
+:focus-visible{ outline:3px solid rgba(31,95,192,.45); outline-offset:2px; border-radius:4px; }
+
+/* 余白・タイポ */
+.section{ padding: clamp(64px,8vw,112px) 0; }
+.section-title{ font-size: clamp(26px,3.6vw,40px); font-weight:800; letter-spacing:.02em; line-height:1.42; }
+.section-lead{ font-size: clamp(14.5px,1.6vw,16.5px); line-height:1.95; }
+
+/* セクション見出し */
+.sec-head{ text-align:center; max-width:760px; margin:0 auto clamp(36px,5vw,54px); }
+.sec-head .eyebrow{ justify-content:center; }
+
+/* ヒーロー上質化 */
+.hero--photo{ min-height: clamp(440px,54vw,640px); }
+.hero__text{ max-width:660px; }
+.hero-badge{ display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.34); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); border-radius:40px; padding:7px 16px 7px 8px; font-weight:700; font-size:13px; margin-bottom:20px; }
+.hero-badge .b{ background:var(--color-orange); color:#fff; border-radius:30px; padding:3px 12px; font-size:12px; }
+.hero--photo h1{ font-size: clamp(27px,4.4vw,48px); line-height:1.42; letter-spacing:.02em; }
+.hero-meta{ display:flex; flex-wrap:wrap; gap:9px 22px; margin-top:22px; font-size:13px; }
+.hero-meta span{ display:inline-flex; align-items:center; gap:7px; opacity:.96; }
+.hero-meta svg{ width:15px; height:15px; }
+
+/* 強み・信頼バンド */
+.creds{ display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--color-line); border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 12px 34px rgba(16,42,94,.07); }
+.cred{ text-align:center; padding:30px 18px; border-left:1px solid var(--color-line); }
+.cred:first-child{ border-left:0; }
+.cred .ic{ width:50px; height:50px; margin:0 auto 12px; border-radius:13px; background:var(--color-blue-light); color:var(--color-blue); display:grid; place-items:center; }
+.cred .ic svg{ width:26px; height:26px; }
+.cred .t{ font-weight:800; color:var(--color-navy); font-size:15px; }
+.cred .d{ font-size:12px; color:var(--color-text-muted); margin-top:5px; line-height:1.6; }
+
+/* 写真CTAバンド */
+.cta-photo{ position:relative; color:#fff; text-align:center; padding: clamp(62px,9vw,116px) 20px; background-image: linear-gradient(rgba(13,33,76,.85),rgba(13,33,76,.85)), var(--cta-img); background-size:cover; background-position:center; }
+.cta-photo .eyebrow{ color:#bfe0ff; justify-content:center; }
+.cta-photo h2{ font-size: clamp(23px,3.6vw,38px); color:#fff; }
+.cta-photo p{ max-width:640px; margin:14px auto 0; opacity:.95; }
+.cta-photo .actions{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center; margin-top:28px; }
+.cta-photo .tel-inline{ color:#fff; font-weight:800; font-size:24px; display:inline-flex; align-items:center; gap:.3em; line-height:1.1; }
+.cta-photo .tel-inline small{ display:block; font-size:11px; opacity:.85; font-weight:500; }
+
+/* サービスカード上質化 */
+.service-card h4{ font-size:18px; }
+.service-card .cat{ display:inline-block; font-size:11px; font-weight:800; letter-spacing:.06em; color:var(--color-blue); background:var(--color-blue-light); border-radius:30px; padding:4px 12px; margin-bottom:10px; }
+
+/* 対応エリア帯 */
+.area-band .in{ display:grid; grid-template-columns:1fr 1.5fr; gap:28px; align-items:center; }
+.area-band h3{ color:var(--color-navy); font-size:22px; margin-bottom:6px; }
+.area-band .cities{ display:flex; flex-wrap:wrap; gap:8px; }
+.area-band .cities span{ background:#fff; border:1px solid var(--color-line); border-radius:30px; padding:8px 18px; font-weight:700; color:var(--color-navy); font-size:14px; box-shadow:0 4px 12px rgba(16,42,94,.05); }
+
+/* フッター刷新 */
+.site-footer{ padding:0; }
+.footer-main{ display:grid; grid-template-columns:1.6fr 1fr 1fr; gap:38px; padding: clamp(50px,6vw,76px) 0 42px; }
+.footer-brand .fname{ color:#fff; font-weight:800; font-size:18px; margin:0 0 12px; }
+.footer-brand p{ color:#aebfda; font-size:13.5px; margin:5px 0; line-height:1.8; }
+.footer-brand .ftel{ display:inline-flex; align-items:center; gap:.4em; color:#fff; font-weight:800; font-size:23px; margin-top:14px; }
+.footer-brand .ftel svg{ width:18px; height:18px; }
+.footer-col h4{ color:#fff; font-size:13px; letter-spacing:.06em; margin:0 0 16px; font-weight:800; }
+.footer-col ul{ list-style:none; padding:0; margin:0; display:grid; gap:11px; }
+.footer-col a{ color:#c5d3ec; font-size:14px; }
+.footer-col a:hover{ color:#fff; }
+.footer-bottom2{ border-top:1px solid #2b478f; text-align:center; padding:18px 0; font-size:12px; color:#9fb0d2; margin:0; }
+
+@media (max-width:880px){
+  .creds{ grid-template-columns:1fr 1fr; }
+  .cred:nth-child(3){ border-left:0; }
+  .cred:nth-child(n+3){ border-top:1px solid var(--color-line); }
+  .area-band .in{ grid-template-columns:1fr; }
+  .footer-main{ grid-template-columns:1fr 1fr; }
+  .footer-brand{ grid-column:1/-1; }
+}
+@media (max-width:560px){
+  .creds{ grid-template-columns:1fr; }
+  .cred{ border-left:0; border-top:1px solid var(--color-line); }
+  .cred:first-child{ border-top:0; }
+  .footer-main{ grid-template-columns:1fr; }
+}
