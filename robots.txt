@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://playmark0227-svg.github.io/MR-creanLAB/sitemap.xml

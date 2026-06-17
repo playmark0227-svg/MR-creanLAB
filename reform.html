@@ -2,148 +2,161 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>リフォーム・ハウスクリーニング｜株式会社MR.クリーンラボ（札幌）</title>
-  <meta name="description" content="札幌のMR.クリーンラボ。クロス・クッションフロアの張り替えから消毒・消臭、ハウスクリーニングまで。住まいのお困りごとをワンストップで対応。女性社員も在籍。相談・調査・お見積り無料。">
-  <meta name="theme-color" content="#0b0b0c">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Space+Grotesk:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リフォーム・ハウスクリーニング｜株式会社MR.クリーンラボ</title>
+  <meta name="description" content="札幌のMR.クリーンラボ。クロス・クッションフロアの張り替えからハウスクリーニングまで、住まいのお困りごとをワンストップで対応します。">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body id="top">
-  <div class="progress"></div>
+<body>
 
+  <!-- ===== ヘッダー（全ページ共通） ===== -->
   <header class="site-header">
-    <div class="container header-bar">
-      <a class="logo" href="index.html"><img src="images/logo.svg" alt="MR.Clean Lab" width="196" height="34"></a>
-      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="globalNav"><span></span><span></span><span></span></button>
-      <nav class="global-nav" id="globalNav">
-        <ul class="nav-list">
+    <div class="container header-top">
+      <a class="logo" href="index.html">
+        <span class="logo-mark">MR</span>
+        <span class="logo-text">MR.Clean Lab</span>
+      </a>
+      <div class="header-actions">
+        <a class="tel-btn" href="tel:011-252-7865">&#9742; 011-252-7865</a>
+        <a class="btn-contact" href="contact.html">お問い合わせ</a>
+      </div>
+    </div>
+    <nav class="global-nav">
+      <div class="container">
+        <ul>
           <li><a href="index.html">ホーム</a></li>
-          <li><a href="pest-control.html">駆除・防除</a></li>
-          <li><a href="drainage.html">排水管洗浄</a></li>
-          <li class="is-current"><a href="reform.html">リフォーム</a></li>
+          <li><a href="pest-control.html">害虫害獣<small>駆除・防除</small></a></li>
+          <li><a href="drainage.html">排水管洗浄<small>グリーストラップ清掃</small></a></li>
+          <li class="is-current"><a href="reform.html">リフォーム<small>ハウスクリーニング</small></a></li>
           <li><a href="news.html">お知らせ</a></li>
           <li><a href="company.html">会社概要</a></li>
         </ul>
-        <div class="header-cta">
-          <a class="telblock" href="tel:01125227865"><span class="num"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</span><span class="cap">Mon–Sat 9–18</span></a>
-          <a class="btn btn--solid" href="contact.html">無料相談</a>
-        </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
   </header>
 
-  <section class="page-head">
-    <span class="page-head__bgword" aria-hidden="true">REFORM</span>
-    <div class="container page-head__in">
-      <p class="crumbs"><a href="index.html">Home</a> — Reform &amp; Cleaning</p>
-      <h1 class="page-head__ttl">リフォーム・<span class="a">ハウスクリーニング</span></h1>
-      <p class="page-head__en">Reform &amp; House Cleaning</p>
+  <!-- ===== ヒーロー ===== -->
+  <section class="hero">
+    <div class="container">
+      <p class="lead-small">札幌近郊で住まいのことにお困りごとなら</p>
+      <h1>リフォームからハウスクリーニングまで<br>お任せください</h1>
+      <a class="btn-cta" href="contact.html">Webで無料相談する</a>
+      <div class="ph" style="margin-top:24px;">［ヒーロー背景画像：リフォーム／ハウスクリーニングのビジュアル］</div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container split">
-      <div class="reveal">
-        <h2 class="sec-ttl" style="font-size:clamp(24px,3.6vw,40px)">住まいの困りごと、<br><span class="a">まとめておまかせ。</span></h2>
-        <p class="sec-lead">「気になるところはいろいろあるけど、個別に依頼するのは面倒…」そんなお悩みも、MR.クリーンラボならまとめておまかせ。札幌近郊で住まいのお困りごとをワンストップで解決します。</p>
-        <p style="margin-top:34px"><a class="btn btn--solid btn--lg" href="contact.html">無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
-      </div>
-      <div class="split__media reveal" data-delay="1"><div class="media" data-label="Interior"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><span class="media__corner"></span></div></div>
-    </div>
-  </section>
-
+  <!-- ===== 個別依頼は面倒？ ===== -->
   <section class="section">
     <div class="container">
-      <div class="sec-head reveal"><span class="sec-idx">01</span><div><span class="sec-en">Promise</span><h2 class="sec-ttl">三つの、お約束。</h2></div></div>
-      <div class="why reveal">
-        <div class="why__row"><div class="why__no">Ⅰ</div><div><h3>相談・調査・見積り無料</h3><p>20年以上の経験を持つ専任のプロがその場で診断。お見積りもお気軽にどうぞ。</p></div></div>
-        <div class="why__row"><div class="why__no">Ⅱ</div><div><h3>明朗会計、適正な安心価格</h3><p>価格を明確に提示。ご納得いただいた価格から追加費用は頂きません。</p></div></div>
-        <div class="why__row"><div class="why__no">Ⅲ</div><div><h3>女性社員も在籍</h3><p>男性に相談しづらい方やお一人暮らしの方も安心。女性社員も同行できます。</p></div></div>
+      <h2 class="section-title">個別に依頼するの面倒じゃありませんか？</h2>
+      <p class="section-lead">気になるところはいろいろあるんだけど…<br>MR.クリーンラボなら、リフォームからハウスクリーニングまで、すべておまかせ！</p>
+      <div class="ph">［イメージ画像：お部屋の様々なお困りごと］</div>
+    </div>
+  </section>
+
+  <!-- ===== 3つの特徴 ===== -->
+  <section class="section alt">
+    <div class="container">
+      <div class="features">
+        <div class="feature"><h3>ご相談・お見積り・調査無料</h3><p>20年以上の経験と実績を持つ専任のプロがその場で診断をおこないます。お見積りもお気軽にお問い合わせください。</p></div>
+        <div class="feature"><h3>明朗会計、適正な安心価格</h3><p>当社はサービスの価格を明確に提示し、お客様に適正な安心価格でご提供。ご納得いただいた価格から追加費用は頂いておりません。</p></div>
+        <div class="feature"><h3>女性社員も在籍</h3><p>男性に相談するのが抵抗のある方、お一人でお住まいの方、遠慮なくご用命ください！女性社員も同行できます。気さくで話しやすいと評価いただいています。</p></div>
       </div>
     </div>
   </section>
 
+  <!-- ===== サービス内容 ===== -->
   <section class="section">
     <div class="container">
-      <div class="sec-head reveal"><span class="sec-idx">02</span><div><span class="sec-en">Services</span><h2 class="sec-ttl">主な、サービス。</h2></div></div>
-      <div class="voices reveal">
-        <div class="voice"><div class="flow__no">01 — Wall</div><h4>クロス張り替え</h4><p>古くなったクロスを早期に張り替え、新たな雰囲気と清潔感をプラス。豊富なデザイン・高品質な素材で対応します。</p></div>
-        <div class="voice"><div class="flow__no">02 — Floor</div><h4>クッションフロア張り替え</h4><p>耐久性が高くお手入れも簡単な素材で床をリフレッシュ。オーダーメイドで快適な空間づくりをお手伝いします。</p></div>
-        <div class="voice"><div class="flow__no">03 — Sanitize</div><h4>お部屋の消毒・消臭</h4><p>厳選した薬剤で空気中のウイルスや細菌を除菌・消臭。安心してお過ごしいただける環境づくりをサポートします。</p></div>
+      <h2 class="section-title">サービス内容</h2>
+      <p class="section-lead">わたしたちにできること<br>
+        お客様のニーズに合ったサービスをお届けいたします。まずは、無料で現地調査させていただき、適正な安心価格でご案内させて頂きます。もちろん、アフターケアも万全です！！</p>
+
+      <div class="service-grid">
+        <div class="service-card"><div class="ph">［施工写真：クロス張り替え］</div><div class="body"><h4>クロス張り替え</h4><p>古くなったクロスを早期に張り替え、お部屋に新たな雰囲気と清潔感をプラスします。豊富なデザインと高品質な素材で、お部屋のスタイルや雰囲気に合わせて対応します。</p></div></div>
+        <div class="service-card"><div class="ph">［施工写真：クッションフロア張り替え］</div><div class="body"><h4>クッションフロア張り替え</h4><p>耐久性が高く、お手入れも簡単な素材を使用し、床のリフレッシュを実現。お部屋の雰囲気やライフスタイルに合わせたオーダーメイドで、快適な空間づくりをお手伝いします。</p></div></div>
+        <div class="service-card"><div class="ph">［イメージ写真：消毒・消臭］</div><div class="body"><h4>お部屋の消毒・消臭</h4><p>消毒・消臭サービスでは、厳選された薬剤を使用し、空気中のウイルスや細菌を除菌・消臭します。快適で清潔な空間をご提供し、安心してお過ごしいただける環境づくりをサポートします。</p></div></div>
       </div>
-      <p class="sec-lead reveal" style="margin-top:44px">そのほか、こんなお困りごとにも対応しています。</p>
-      <ul class="svc__tags reveal" style="margin-top:16px"><li>貯水槽（受水槽）清掃</li><li>ダクト清掃</li><li>水道・トイレの詰まり修繕</li><li>美装</li><li>各種リフォーム</li></ul>
+
+      <p class="section-lead" style="margin-top:28px;">そのほか、こんなお困りごとにも対応しています。</p>
+      <ul class="tag-list" style="justify-content:center;">
+        <li>貯水槽（受水槽）清掃</li><li>ダクト清掃</li><li>水道・トイレの詰まり修繕</li><li>美装</li>
+      </ul>
     </div>
   </section>
 
+  <!-- ===== 対応エリア ===== -->
+  <section class="section alt">
+    <div class="container">
+      <h2 class="section-title">対応エリア</h2>
+      <p class="section-lead">札幌市内および札幌市近郊町村</p>
+    </div>
+  </section>
+
+  <!-- ===== ご利用の手順 ===== -->
   <section class="section">
     <div class="container">
-      <div class="sec-head reveal"><span class="sec-idx">03</span><div><span class="sec-en">Area</span><h2 class="sec-ttl">対応エリア。</h2><p class="sec-lead">札幌市内および札幌市近郊町村。営業拠点は札幌・函館・旭川・帯広・釧路の5エリア。</p></div></div>
-      <ul class="svc__tags reveal"><li>札幌市内</li><li>札幌近郊町村</li><li>函館</li><li>旭川</li><li>帯広</li><li>釧路</li></ul>
+      <h2 class="section-title">ご利用の手順</h2>
+      <p class="section-lead">簡単4ステップ！最短即日対応可</p>
+      <div class="steps">
+        <div class="step"><h4>お問い合わせ</h4><p>まずはフォームまたはお電話にてお気軽にご連絡ください。</p></div>
+        <div class="step"><h4>現地調査・お見積り</h4><p>現地調査を行い、適正な安心価格でお見積りをご提示します。</p></div>
+        <div class="step"><h4>打ち合わせ・内容確認</h4><p>ご提案内容にご納得いただけましたら作業日時を調整します。</p></div>
+        <div class="step"><h4>作業完了・ご精算</h4><p>作業完了後、ご確認のうえご精算いただきます。</p></div>
+      </div>
     </div>
   </section>
 
+  <!-- ===== 実績 / お客様の声 ===== -->
+  <section class="section alt">
+    <div class="container">
+      <h2 class="section-title">ご利用いただいた実績・お客様の声</h2>
+      <p class="section-lead">個人宅から法人まで幅広くご利用いただいています。</p>
+      <div class="cards-4">
+        <div class="voice-card"><div class="ph">［施工写真：グリーストラップ清掃］</div><div class="body"><h4>対応が早くて安心</h4><p>お客様の声（要確認）</p></div></div>
+        <div class="voice-card"><div class="ph">［施工写真：クロス張替え］</div><div class="body"><h4>丁寧な対応でした</h4><p>お客様の声（要確認）</p></div></div>
+        <div class="voice-card"><div class="ph">［施工写真：排水管洗浄］</div><div class="body"><h4>対象も詳しく説明</h4><p>お客様の声（要確認）</p></div></div>
+        <div class="voice-card"><div class="ph">［施工写真：床張替え］</div><div class="body"><h4>安い！そして安心</h4><p>お客様の声（要確認）</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
   <section class="section">
     <div class="container">
-      <div class="sec-head reveal"><span class="sec-idx">04</span><div><span class="sec-en">Flow</span><h2 class="sec-ttl">ご利用の流れ。</h2></div></div>
-      <div class="flow reveal">
-        <div class="flow__step"><div class="flow__no">Step 01</div><h4>お問い合わせ</h4><p>フォームまたはお電話でご連絡ください。</p></div>
-        <div class="flow__step"><div class="flow__no">Step 02</div><h4>現地調査・お見積り</h4><p>現地を調査し、安心価格でお見積りを提示。</p></div>
-        <div class="flow__step"><div class="flow__no">Step 03</div><h4>打ち合わせ</h4><p>ご納得いただけましたら日時を調整。</p></div>
-        <div class="flow__step"><div class="flow__no">Step 04</div><h4>作業完了・ご精算</h4><p>ご確認のうえご精算いただきます。</p></div>
+      <h2 class="section-title">よくあるご質問</h2>
+      <div class="faq-list">
+        <div class="faq-item"><p class="q">使用する薬剤は安全ですか？</p></div>
+        <div class="faq-item"><p class="q">見積もりの段階で料金は発生しますか？</p></div>
+        <div class="faq-item"><p class="q">保険に加入されていますか？</p></div>
+        <div class="faq-item"><p class="q">予約はどのくらい前にすればいいのですか？</p></div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="sec-head reveal"><span class="sec-idx">05</span><div><span class="sec-en">FAQ</span><h2 class="sec-ttl">よくあるご質問。</h2></div></div>
-      <div class="faq reveal">
-        <div class="faq__item"><button class="faq__q"><span class="qn">壱</span>使用する薬剤は安全ですか？<svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><div class="faq__a-inner">人やペットへの影響に配慮した薬剤を適正に使用します。ご不安な点はお気軽にご相談ください。</div></div></div>
-        <div class="faq__item"><button class="faq__q"><span class="qn">弐</span>見積もりの段階で料金は発生しますか？<svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><div class="faq__a-inner">ご相談・現地調査・お見積りはすべて無料です。ご納得いただいてから作業を開始します。</div></div></div>
-        <div class="faq__item"><button class="faq__q"><span class="qn">参</span>女性スタッフに来てもらえますか？<svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><div class="faq__a-inner">女性社員が在籍しており、同行が可能です。ご予約時にお申し付けください。</div></div></div>
-        <div class="faq__item"><button class="faq__q"><span class="qn">肆</span>予約はどのくらい前にすればいいですか？<svg class="chev" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq__a"><div class="faq__a-inner">内容や時期によりますが、最短即日での対応も可能です。まずはお気軽にご連絡ください。</div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container cta">
-      <span class="en-label">Contact</span>
-      <h2 class="reveal">住まいのリフォーム、<br><span class="a">まずはご相談を。</span></h2>
-      <p class="reveal" data-delay="1">ご相談・お見積り・現地調査は無料です。</p>
-      <div class="cta__actions reveal" data-delay="2">
-        <a class="btn btn--solid btn--lg" href="contact.html">無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="cta__tel" href="tel:01125227865"><span class="num"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</span><span class="cap">受付 9:00–18:00</span></a>
-      </div>
-    </div>
-  </section>
-
+  <!-- ===== フッター（全ページ共通） ===== -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img src="images/logo-light.svg" alt="MR.Clean Lab" width="196" height="34">
-          <p>株式会社・エムアールクリーンラボ<br>〒062-0035 北海道札幌市豊平区西岡五条13丁目1番20号</p>
-          <a class="f-tel" href="tel:01125227865"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>011-252-7865</a>
-        </div>
-        <div class="footer-col"><h4>Service</h4><ul><li><a href="pest-control.html">害虫害獣 駆除・防除</a></li><li><a href="drainage.html">排水管洗浄・グリーストラップ清掃</a></li><li><a href="reform.html">リフォーム・ハウスクリーニング</a></li></ul></div>
-        <div class="footer-col"><h4>Company</h4><ul><li><a href="index.html">ホーム</a></li><li><a href="company.html">会社概要</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    <div class="container footer-cols">
+      <div class="footer-company">
+        <p class="name">株式会社・エムアールクリーンラボ</p>
+        <p>〒062-0035<br>北海道札幌市豊平区西岡五条13丁目1番20号</p>
       </div>
-      <div class="footer-word" aria-hidden="true">MR.CLEAN LAB</div>
-      <div class="footer-bottom"><span>© <span data-year>2024</span> MR.Clean Lab. All rights reserved.</span><span>Sapporo · Hakodate · Asahikawa · Obihiro · Kushiro</span></div>
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="pest-control.html">害虫害獣 駆除・防除</a></li>
+          <li><a href="drainage.html">排水管洗浄・グリーストラップ清掃</a></li>
+          <li><a href="reform.html">リフォーム・ハウスクリーニング</a></li>
+        </ul>
+        <ul>
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+        </ul>
+      </nav>
     </div>
+    <p class="copyright">Copyright(C) 2023 MR.Clean Lab. All rights reserved.</p>
   </footer>
 
-  <div class="mcta">
-    <a class="tel" href="tel:01125227865"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1Z"/></svg>電話する</a>
-    <a class="req" href="contact.html">無料で相談する</a>
-  </div>
-  <a class="pagetop" href="#top" aria-label="ページ上部へ戻る"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
-  <script src="js/main.js" defer></script>
 </body>
 </html>
