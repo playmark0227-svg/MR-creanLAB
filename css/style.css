@@ -563,3 +563,9 @@ a:hover { text-decoration: underline; }
   .stats .item:first-child{ border-top:0; }
   .hero__actions .btn-cta, .hero__actions .btn-ghost{ width:100%; justify-content:center; }
 }
+
+/* アップロードしたロゴ画像（あれば差し替え／無ければテキストロゴ表示） */
+.logo-img{ height: 44px; width: auto; max-width: 230px; display: block; }
+.logo:not(.no-img) .logo-mark,
+.logo:not(.no-img) .logo-text { display: none; }
+@media (max-width: 560px){ .logo-img{ height: 36px; } }
