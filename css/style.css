@@ -666,3 +666,6 @@ html{ scroll-padding-top: 92px; }
 .cover-trust .ck{ width:22px; height:22px; border-radius:50%; background:var(--color-orange); color:#fff; display:grid; place-items:center; flex:none; }
 .cover-trust .ck svg{ width:13px; height:13px; }
 @media (max-width:560px){ .cover-tel .n{ font-size:21px; } }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.cover__sub{ text-align:center; color:var(--color-navy); font-weight:700; font-size:clamp(13px,1.6vw,16px); line-height:1.9; margin-top:22px; }
+.cover__sub b{ color:var(--color-blue); }
