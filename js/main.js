@@ -41,3 +41,31 @@
     }, { passive: true });
   }
 })();
+
+/* モバイル：ハンバーガーメニュー（ヘッダーに動的挿入） */
+(function () {
+  "use strict";
+  var headerTop = document.querySelector(".header-top");
+  var nav = document.querySelector(".global-nav");
+  if (!headerTop || !nav || headerTop.querySelector(".nav-toggle")) return;
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "nav-toggle";
+  btn.setAttribute("aria-label", "メニューを開閉");
+  btn.setAttribute("aria-expanded", "false");
+  btn.innerHTML = "<span></span>";
+  headerTop.appendChild(btn);
+  function close() {
+    nav.classList.remove("is-open");
+    btn.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+  }
+  btn.addEventListener("click", function () {
+    var open = nav.classList.toggle("is-open");
+    btn.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  });
+  nav.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", close); });
+  window.addEventListener("resize", function () { if (window.innerWidth > 768) close(); });
+  window.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+})();
