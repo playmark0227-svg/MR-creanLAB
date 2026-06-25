@@ -745,3 +745,50 @@ html{ scroll-padding-top: 92px; }
 .svc-over-note{ text-align:center; margin-top:28px; font-size:13.5px; color:var(--color-text-muted); }
 .svc-over-note b{ color:var(--color-navy); font-weight:700; }
 @media (max-width:880px){ .svc-over{ grid-template-columns:1fr; max-width:560px; margin-inline:auto; } }
+
+/* =========================================================
+   v4 統一感・洗練レイヤー（角丸・影・見出しの標準化）
+   サイト全体の角丸/影/ホバー/見出しを一つのスケールに揃える。
+   ========================================================= */
+:root{
+  --radius-card: 14px;   /* 通常カード */
+  --radius-lg: 18px;     /* 大きめのメディア・コンテナ（未定義だった変数を定義） */
+  --shadow-sm: 0 6px 18px rgba(16,42,94,.06);
+  --shadow-md: 0 12px 30px rgba(16,42,94,.10);
+  --shadow-lg: 0 22px 46px rgba(16,42,94,.15);
+}
+
+/* カード角丸の統一（ベースの 6px → 14px に引き上げて bigカードと調和） */
+.feature,
+.service-card,
+.voice-card,
+.step{ border-radius: var(--radius-card); }
+.checklist{ border-radius: var(--radius-lg); }
+.faq-acc .item,
+.problem-list li{ border-radius: var(--radius-card); }
+
+/* 影・ホバーの統一（バラついていた数値を共通トークンに集約） */
+.feature,
+.service-card,
+.voice-card,
+.svc-o{ box-shadow: var(--shadow-sm); }
+.feature:hover,
+.service-card:hover,
+.voice-card:hover,
+.svc-o:hover{ transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+/* セクション見出しの共通アクセント下線（TOP/下層を問わず統一感を付与） */
+.section-title{ position: relative; }
+.section-title::after{
+  content: "";
+  display: block;
+  width: 52px;
+  height: 3px;
+  margin: 16px auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-orange));
+}
+/* 暗背景の見出しには下線を付けない */
+.cta-band .section-title::after,
+.cta-photo .section-title::after,
+.stats .section-title::after{ display: none; }
