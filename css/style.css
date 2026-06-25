@@ -792,3 +792,40 @@ html{ scroll-padding-top: 92px; }
 .cta-band .section-title::after,
 .cta-photo .section-title::after,
 .stats .section-title::after{ display: none; }
+
+/* =========================================================
+   ローディング画面（初回表示）
+   ========================================================= */
+.preloader{
+  position: fixed; inset: 0; z-index: 9999;
+  display: grid; place-items: center;
+  background: #fff;
+  transition: opacity .55s ease, visibility .55s ease;
+}
+.preloader.is-done{ opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader__inner{ display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px; }
+.preloader__logo{
+  width: clamp(150px, 42vw, 210px); height: auto;
+  animation: pl-pop .6s ease both;
+}
+.preloader__bar{
+  width: 168px; height: 4px; border-radius: 4px;
+  background: var(--color-blue-light); overflow: hidden;
+}
+.preloader__bar span{
+  display: block; height: 100%; width: 40%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--color-blue), var(--color-orange));
+  animation: pl-slide 1.15s ease-in-out infinite;
+}
+@keyframes pl-slide{
+  0%{ transform: translateX(-130%); }
+  100%{ transform: translateX(330%); }
+}
+@keyframes pl-pop{
+  from{ opacity: 0; transform: scale(.92); }
+  to{ opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .preloader__logo{ animation: none; }
+  .preloader__bar span{ animation: none; width: 100%; }
+}

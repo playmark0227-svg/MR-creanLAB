@@ -1,4 +1,23 @@
 /* MR.Clean Lab — LP interactions (依存なし) */
+
+/* ローディング画面：読み込み完了でフェードアウト */
+(function () {
+  "use strict";
+  var pl = document.getElementById("preloader");
+  if (!pl) return;
+  var done = false;
+  function hide() {
+    if (done) return;
+    done = true;
+    pl.classList.add("is-done");
+    setTimeout(function () { if (pl.parentNode) pl.parentNode.removeChild(pl); }, 650);
+  }
+  if (document.readyState === "complete") { hide(); }
+  else { window.addEventListener("load", hide); }
+  /* 念のための保険（画像が極端に遅くても固まらない） */
+  setTimeout(hide, 4000);
+})();
+
 (function () {
   "use strict";
 
