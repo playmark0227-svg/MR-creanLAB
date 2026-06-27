@@ -1086,3 +1086,46 @@ html{ scroll-padding-top: 92px; }
   .checklist{ grid-template-columns:1fr; }
   /* info-table の縦積みは既存 600px ルールで担保。2カラムulは 601px+ 限定のため自動解除 */
 }
+
+/* =========================================================
+   v6 スマホ表紙の再設計
+   縦長画面で「写真の上にテキスト」を重ねると顔が見切れるため、
+   スマホでは『写真バンド（全高表示で顔が必ず入る）＋下にnavyの
+   テキスト面』の積み重ね構成に切り替える。
+   ========================================================= */
+@media (max-width:680px){
+  .cover{ background:var(--color-navy); }
+  .cover__frame{
+    display:block; min-height:0; overflow:hidden;
+    background:var(--color-navy); text-align:center;
+  }
+  /* 写真は上部バンドとして全高表示（縦は切れず顔が必ず入る）。
+     16:9素材なので横のみクロップ＝女性側(x≈80%)を見せる */
+  .cover__bg{
+    position:relative; inset:auto; display:block;
+    width:100%; height:auto; aspect-ratio:4/3;
+    object-fit:cover; object-position:80% 50%;
+  }
+  /* 全面スクリムは無効化（顔を覆わない） */
+  .cover__scrim{ display:none; }
+  /* テキストは写真の下、navyベタ面に置く */
+  .cover__inner{
+    position:relative; z-index:2;
+    max-width:none; margin:0;
+    padding:22px 20px 34px; text-align:center;
+    background:var(--color-navy);
+  }
+  /* 写真下端をnavyへ自然に溶かす（顔は上部なので影響しない） */
+  .cover__inner::before{
+    content:""; position:absolute; left:0; right:0; top:-48px; height:48px;
+    background:linear-gradient(180deg, rgba(16,53,122,0), var(--color-navy));
+    pointer-events:none;
+  }
+  .cover__eyebrow{ background:rgba(255,255,255,.16); }
+  .cover__title{ font-size:clamp(26px,7.4vw,34px); margin:14px 0 12px; text-shadow:none; line-height:1.36; }
+  .cover__lead{ text-shadow:none; margin-inline:auto; max-width:none; }
+  .cover__trust{ justify-content:center; gap:10px 18px; margin-top:20px; }
+  .cover__actions{ justify-content:center; margin-top:24px; gap:14px; }
+  .cover__actions .btn-cta{ width:100%; justify-content:center; }
+  .cover-tel-o{ width:100%; justify-content:center; }
+}
