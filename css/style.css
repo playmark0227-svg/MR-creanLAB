@@ -3,7 +3,7 @@
    スクリーンショットを元に再構築した近似デザイン。
    配色・余白は CSS 変数で調整しやすくしています（後のデザイン改造用）。
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
 
 :root {
   --color-navy: #16357a;       /* 濃紺（ヒーロー帯・見出し） */
@@ -848,4 +848,241 @@ html{ scroll-padding-top: 92px; }
 @media (prefers-reduced-motion: reduce){
   .preloader__logo{ animation: none; }
   .preloader__bar span{ animation: none; width: 100%; }
+}
+
+/* =========================================================
+   v5 洗練レイヤー（引き算の上質化 / AI手癖の抑制）
+   - 既存 v1〜v4 を末尾で上書き。!important は不使用。
+   - ブランド色（navy #16357a / blue #1f5fc0 / orange #ef8200 /
+     blue-light #eaf2fb）のレンジ厳守。新色の乱発はしない。
+   ========================================================= */
+
+/* ---- 0. フォント：使用ウェイトを実ロードして faux-bold を撲滅 ---- */
+/* @import は CSS 先頭でしか効かないため、HTML側 <head> の Google Fonts URL を
+   wght@400;500;700;800 に差し替える（htmlEdits 参照）。900は未使用化、
+   未読込だった 600/800 を正式ロードして字形の潰れ＝“重さ”を解消する。 */
+
+/* ---- 1. タイポ階層：800乱用を 700基調へ。差は size/字間/余白で作る ---- */
+.section-title{ font-weight:700; letter-spacing:-.01em; line-height:1.4; }
+.svc-o__title{ font-weight:700; letter-spacing:0; }
+.cred .t{ font-weight:700; }
+.service-card h4{ font-weight:700; }
+.trust-bar .lead{ font-weight:700; }
+.footer-col h4{ font-weight:600; letter-spacing:.12em; }
+.footer-brand .fname{ font-weight:700; }
+.eyebrow{ font-weight:600; letter-spacing:.14em; font-size:12px; color:var(--color-blue); }
+/* 最重要級だけ 800 を残してメリハリを担保 */
+.cover__title{ font-weight:800; letter-spacing:-.01em; }
+.hero--photo h1{ font-weight:800; letter-spacing:-.005em; }
+.stats .n{ font-weight:700; }
+
+/* 行間の要素別最適化（一律1.8の間延びを是正） */
+.section-title,.cover__title,.hero--photo h1,.problem-cap{ line-height:1.4; }
+.feature h3,.service-card h4,.svc-o__title,.cred .t{ line-height:1.45; }
+.btn-cta,.btn-ghost,.tel-btn,.btn-contact,.global-nav a{ line-height:1.4; }
+.message-lead{ letter-spacing:-.01em; line-height:1.7; }
+
+/* 英字スモールラベルの規格統一（細め＋広い字間） */
+.eyebrow,.svc-o__en,.service-card .cat{ font-weight:600; letter-spacing:.14em; }
+.hero--photo .en-tag{ letter-spacing:.18em; font-weight:600; }
+
+/* リード文を“説明文”階層として本文と差別化 */
+.section-lead{ font-weight:500; color:#46505f; line-height:1.9; letter-spacing:.01em; max-width:62ch; }
+.svc-over-note{ font-weight:500; }
+
+/* 数字に欧文サンセリフ＋tabular で素材感（OS同梱フォント、追加読込なし） */
+.stats .n,.cover-tel-o .n,.cta-photo .tel-inline,.cta-band .tel-inline,
+.footer-brand .ftel,.hero__tel .n{
+  font-family:"Helvetica Neue",Arial,var(--font-jp);
+  font-weight:700; letter-spacing:-.01em; font-feature-settings:"tnum" 1;
+}
+.stats .n small{ font-family:var(--font-jp); font-weight:600; }
+
+/* CTA和文ラベルの極太連鎖を断つ（数字は上で欧文化済み） */
+.mcta a{ font-weight:700; }
+.hero__tel{ font-weight:700; }
+.cta-band .tel-inline,.cta-photo .tel-inline{ font-weight:700; }
+
+/* ナビ：合成600の解消後、サブラベルを一段弱めて主従を明確化 */
+.global-nav a{ letter-spacing:.01em; }
+.global-nav a small{ font-weight:400; font-size:11.5px; letter-spacing:.02em; opacity:.85; color:var(--color-text-muted); }
+
+/* 通し番号は欧文化＋抑制して“さりげなく” */
+.feature .no{ font-size:30px; font-weight:700; font-family:"Helvetica Neue",Arial,sans-serif; letter-spacing:0; color:#dfe9f7; }
+
+/* ---- 2. AI手癖の撤去：虹色グラデ下線 → navy単色ショートバー ---- */
+.section-title::after{
+  width:40px; height:2px; margin:14px auto 0;
+  border-radius:0;
+  background:var(--color-navy); opacity:.85;
+}
+
+/* eyebrow の orange ダッシュ（デッドコード）を無効化し再混入を防止 */
+.eyebrow::before{ display:none; }
+
+/* ---- 3. グラデの画一反復を抑制：navy主役のフラット＋微差 ---- */
+/* 数字帯＝静か（縦・低コントラスト） */
+.stats{ background:#13306e; background:linear-gradient(180deg,#16357a,#13306e); }
+.stats .item{ border-left:1px solid rgba(255,255,255,.14); }
+/* CTA帯＝決め（縦・暗めで重心） */
+.cta-band{ background:var(--color-navy); background:linear-gradient(180deg,var(--color-navy),#122c63); }
+/* 下層ヒーロー帯＝導入（フラットnavy＋ごく控えめなラジアル発光＋橙の細い罫） */
+.page-hero{
+  background:var(--color-navy);
+  background-image:radial-gradient(120% 140% at 100% 0%, rgba(31,95,192,.42), transparent 60%);
+  border-bottom:3px solid var(--color-orange);
+}
+/* 表紙下地：写真未読込時もフラットnavy（navy→blue反復を1つ削減） */
+.cover__frame{ background:var(--color-navy); }
+/* トップ汎用heroの場外水色終端をブランドblueへ収束 */
+.hero{ background:linear-gradient(125deg,#0f2c6b 0%, var(--color-blue) 100%); }
+
+/* スクリムの青被りを抑え、写真の素材感を活かす（中立な濃紺へ） */
+.cover__scrim{ background:linear-gradient(100deg, rgba(10,22,45,.90) 0%, rgba(12,26,55,.66) 40%, rgba(12,26,55,.22) 66%, rgba(12,26,55,0) 90%); }
+
+/* アイコン/タイルの 135度・場外水色グラデを単色面へ */
+.feature .ic{ background:var(--color-blue); box-shadow:0 6px 14px rgba(31,95,192,.18); }
+.service-card .ph{ background:var(--color-navy); }
+.ph{ background:var(--color-blue-light); }
+.problem-list .ic{ box-shadow:none; }
+
+/* プリローダー進捗バーの虹色グラデを単色化（第一印象の手癖を消す） */
+.preloader__bar span{ background:var(--color-blue); }
+
+/* section.alt の広面ベタに極薄の奥行きと境界（明度差のみ・彩度は上げない） */
+.section.alt{ background:linear-gradient(180deg,#f1f6fd 0%, var(--color-blue-light) 100%); border-top:1px solid #e3edf9; border-bottom:1px solid #e3edf9; }
+
+/* ---- 4. 影：2層化で接地感、過剰な青被りを抑制 ---- */
+:root{
+  --shadow-sm: 0 1px 2px rgba(16,42,94,.04), 0 4px 12px rgba(16,42,94,.06);
+  --shadow-md: 0 2px 4px rgba(16,42,94,.05), 0 10px 24px rgba(16,42,94,.09);
+  --shadow-lg: 0 4px 8px rgba(16,42,94,.06), 0 18px 38px rgba(16,42,94,.13);
+}
+/* v4トークン化から漏れていた生値をトークンへ寄せる */
+.problem-list li{ box-shadow:var(--shadow-sm); }
+.lp-split .media{ box-shadow:var(--shadow-lg); }
+/* 線を青寄りに薄めて影と協調 */
+.feature,.service-card,.voice-card,.svc-o,.step{ border-color:#e6ecf4; }
+
+/* ---- 5. ホバー：均一-6pxリフトを役割で差別化＋抑制 ---- */
+.feature:hover,.voice-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); }
+.service-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+.svc-o{ transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.svc-o:hover{ transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:var(--color-blue); }
+
+/* 画像ズームを統一して“静かに寄る” */
+.service-card .media img,.svc-o__media img{ transition:transform .5s cubic-bezier(.2,.6,.2,1); }
+.service-card:hover .media img,.svc-o:hover .svc-o__media img{ transform:scale(1.03); }
+
+/* 矢印は幅再計算なしで滑らかに（gap変化→translateX） */
+.svc-o__more svg,.service-card .more svg{ transition:transform .25s ease; }
+.svc-o:hover .svc-o__more svg,.service-card:hover .more svg{ transform:translateX(3px); }
+
+/* 面リンク（カード）はホバー下線を出さない（崩れ防止） */
+.svc-o,.svc-o:hover{ text-decoration:none; }
+
+/* reveal を軽量化して“重い登場”を排除 */
+.reveal{ transform:translateY(14px); transition:opacity .55s ease, transform .55s cubic-bezier(.2,.6,.2,1); }
+.reveal.d1{ transition-delay:.06s; } .reveal.d2{ transition-delay:.12s; } .reveal.d3{ transition-delay:.18s; }
+
+/* ---- 6. ボタンの手触り：影色の取り違え修正＋focus/active ---- */
+.btn-cta{ box-shadow:0 8px 18px rgba(239,130,0,.22); transition:transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.btn-cta:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(239,130,0,.30); }
+.cover-cta{ box-shadow:0 10px 24px rgba(239,130,0,.30); }
+.btn-cta:focus-visible,.cover-cta:focus-visible,
+.btn-contact:focus-visible,.form button:focus-visible{ outline:3px solid rgba(239,130,0,.55); outline-offset:3px; }
+.tel-btn:focus-visible,.mcta a:focus-visible{ outline:3px solid rgba(31,95,192,.5); outline-offset:3px; }
+.btn-cta:active,.btn-contact:active,.form button:active{ transform:translateY(1px); }
+
+/* FAQ の押下手応えを上品に */
+.faq-acc .a{ transition:max-height .32s cubic-bezier(.4,0,.2,1); }
+.faq-acc .q:hover{ background:rgba(31,95,192,.04); }
+.faq-acc .q:hover .qm{ background:var(--color-blue); color:#fff; }
+.faq-acc .item.open .chev{ color:var(--color-blue); }
+
+/* ---- 7. 余白・垂直リズムの一本化 ---- */
+.section{ padding-block: clamp(56px,7vw,104px); }
+:root{ --gap-grid: clamp(18px,2.2vw,26px); }
+.features,.service-grid,.svc-over,.steps,.cards-4{ gap: var(--gap-grid); }
+
+/* sec-head 化された下層見出しの内部リズム（findings 統合：lead有無で“間”を担保） */
+.sec-head .section-title{ margin-bottom: clamp(14px,2vw,22px); }
+.sec-head:has(.section-lead) .section-title{ margin-bottom: clamp(10px,1.4vw,16px); }
+.sec-head .section-lead{ margin-bottom:0; }
+/* sec-head 配下でないリードは画面連動の下余白に */
+.section-lead{ margin-left:auto; margin-right:auto; }
+
+/* 帯系の窮屈/薄さを解消しセクションリズムへ寄せる */
+.cta-band{ padding: clamp(48px,6vw,80px) 20px; }
+.page-hero{ padding: clamp(64px,9vw,104px) 20px; }
+.page-hero .ja{ margin-top:12px; }
+
+/* 同色 alt セクションが連続する時だけ“刻み”を復活 */
+.section.alt + .section.alt{ padding-top:0; }
+.section.alt + .section.alt > .container{ padding-top: clamp(40px,5vw,64px); border-top:1px solid rgba(22,53,122,.08); }
+
+/* 代表メッセージ等の読み物 measure を締める（テーブルの880pxは別） */
+.message-lead{ margin: clamp(8px,1.5vw,16px) 0 clamp(20px,2.5vw,28px); }
+
+/* ---- 8. 下層ページの格上げ：sec-head 左寄せ版 ---- */
+.sec-head--left{ text-align:left; max-width:none; margin:0 0 clamp(28px,4vw,40px); }
+.sec-head--left .eyebrow{ justify-content:flex-start; }
+.sec-head--left .section-title{ text-align:left; }
+.sec-head--left .section-title::after{ margin-left:0; margin-right:auto; }
+.sec-head--left .section-lead{ text-align:left; margin-left:0; max-width:62ch; }
+
+/* 下層 hero--photo の英字eyebrow（既存 .en-tag 流用＋色味のみ規定） */
+.hero--photo .en-tag{ display:inline-block; color:#bfe0ff; margin-bottom:6px; }
+
+/* 下層 feature の文字階層を TOP 水準へ */
+.feature h3{ font-size:17px; font-weight:700; letter-spacing:.01em; line-height:1.5; margin:0 0 8px; }
+.feature p{ font-size:13.5px; line-height:1.85; color:#525c6a; }
+
+/* 下層 service-card のアイコンタイルを薄青地×青線画に（濃青グラデ箱の多用を回避） */
+.service-card .ph{ background:var(--color-blue-light); color:var(--color-blue); border-bottom:1px solid #e6ecf4; min-height:150px; }
+.service-card .ph svg{ width:48px; height:48px; opacity:.9; }
+
+/* drainage の checklist をカード化＋2カラムで素材感を付与 */
+.checklist{ display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; background:#fff; border:1px solid #e6ecf4; box-shadow:var(--shadow-sm); padding:24px 28px; }
+.checklist li{ padding-left:30px; }
+.checklist li::before{ content:""; position:absolute; left:0; top:.35em; width:18px; height:18px; border-radius:50%; background:var(--color-blue-light); }
+.checklist li::after{ content:""; position:absolute; left:5px; top:.62em; width:8px; height:4px; border-left:2px solid var(--color-blue); border-bottom:2px solid var(--color-blue); transform:rotate(-45deg); }
+
+/* ---- 9. 会社概要：page-hero の主従と装飾、info-table のカード化 ---- */
+/* 巨大EN主役→英字キャップラベル＋日本語主役に主従逆転（DOM順そのまま） */
+.page-hero .en{ font-size:13px; font-weight:600; letter-spacing:.22em; opacity:.85; margin:0; }
+.page-hero .ja{ font-size:clamp(24px,3.4vw,32px); font-weight:700; letter-spacing:.02em; }
+/* 両側 em-dash 装飾を撤去し、橙の極短ライン1本に置換 */
+.page-hero .ja::before{ content:none; }
+.page-hero .ja::after{ content:""; display:block; width:32px; height:2px; margin:12px auto 0; background:var(--color-orange); }
+
+/* info-table をカード設計で上質化（th薄青・偶数行極薄・角丸コンテナ） */
+.info-table{ border:1px solid #e6ecf4; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); }
+.info-table th{ background:var(--color-blue-light); border-bottom:1px solid #e6ecf4; vertical-align:top; }
+.info-table td{ background:#fff; border-bottom:1px solid #e6ecf4; }
+.info-table tr:nth-child(even) td{ background:#fafbfd; }
+.info-table tr:last-child th,.info-table tr:last-child td{ border-bottom:0; }
+@media (min-width:601px){
+  .info-table ul{ display:grid; grid-template-columns:1fr 1fr; gap:2px 18px; }
+}
+
+/* ---- 10. reduced-motion 全面対応（アクセシビリティ＆過剰モーション回避） ---- */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{
+    animation-duration:.001ms; animation-iteration-count:1; transition-duration:.001ms;
+  }
+  .reveal{ opacity:1; transform:none; }
+  .service-card:hover .media img,
+  .svc-o:hover .svc-o__media img{ transform:none; }
+}
+
+/* ---- 11. レスポンシブ補正 ---- */
+@media (max-width:768px){
+  /* page-hero の主従逆転がモバイルでも崩れない（既存の 880px 縮小指定を上書き） */
+  .page-hero .en{ font-size:12px; }
+}
+@media (max-width:560px){
+  .checklist{ grid-template-columns:1fr; }
+  /* info-table の縦積みは既存 600px ルールで担保。2カラムulは 601px+ 限定のため自動解除 */
 }
