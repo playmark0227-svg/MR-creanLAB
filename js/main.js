@@ -198,12 +198,12 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260630b";
+  var VER = "?v=20260630c";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
-    { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "52% 30%" },
+    { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
     { src: "images/cover-3.jpg" + VER, alt: "キッチンの排水・水まわりを作業するスタッフ", pos: "64% 32%" },
-    { src: "images/cover-4.jpg" + VER, alt: "リフォーム・ハウスクリーニングを行うスタッフ", pos: "56% 34%" }
+    { src: "images/cover-4.jpg" + VER, alt: "リフォーム・ハウスクリーニングを行うスタッフ", pos: "78% 28%" }
   ];
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
