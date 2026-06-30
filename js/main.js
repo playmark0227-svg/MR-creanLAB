@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260630c";
+  var VER = "?v=20260630d";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -281,4 +281,169 @@ var MRCL_ANIM = {
   document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else start(); });
 
   start();
+})();
+
+/* =========================================================
+   v8 WOWエフェクト JS（依存なし・IIFE・既存と非競合）
+   prefers-reduced-motion / タッチ端末で各演出を安全に無効化。
+   ========================================================= */
+(function () {
+  "use strict";
+  var mqReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduce = mqReduce && mqReduce.matches;
+  var fine = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var doc = document, body = doc.body;
+
+  /* ---- 1) スクロール進捗バー ---- */
+  if (!reduce) {
+    var bar = doc.createElement("div");
+    bar.className = "scroll-prog";
+    body.appendChild(bar);
+    var barRAF = 0;
+    function updBar() {
+      barRAF = 0;
+      var h = doc.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? (window.scrollY || window.pageYOffset) / h : 0;
+      bar.style.width = (p * 100).toFixed(2) + "%";
+    }
+    window.addEventListener("scroll", function () { if (!barRAF) barRAF = requestAnimationFrame(updBar); }, { passive: true });
+    updBar();
+  }
+
+  /* ---- 2) ヘッダー縮小 ---- */
+  var header = doc.querySelector(".site-header");
+  if (header) {
+    var hRAF = 0;
+    function updH() { hRAF = 0; header.classList.toggle("shrink", (window.scrollY || window.pageYOffset) > 40); }
+    window.addEventListener("scroll", function () { if (!hRAF) hRAF = requestAnimationFrame(updH); }, { passive: true });
+    updH();
+  }
+
+  /* ---- 3) 数字カウントアップ ---- */
+  var stats = doc.querySelector(".stats");
+  if (stats && "IntersectionObserver" in window) {
+    var sObs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        sObs.unobserve(e.target);
+        doc.querySelectorAll(".stats .n").forEach(function (n) {
+          var node = n.firstChild;
+          if (!node || node.nodeType !== 3) return;
+          var m = node.nodeValue.match(/^(\D*)(\d+)(.*)$/);
+          if (!m) return;
+          var pre = m[1], target = parseInt(m[2], 10), post = m[3];
+          if (!target || reduce) { return; }
+          var dur = 1400, t0 = null;
+          function step(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            node.nodeValue = pre + Math.round(target * eased) + post;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          node.nodeValue = pre + "0" + post;
+          requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.4 });
+    sObs.observe(stats);
+  }
+
+  /* ---- 4) 方向付きreveal & 見出しスイープ（.in付与） ---- */
+  if ("IntersectionObserver" in window) {
+    var vObs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); vObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    doc.querySelectorAll(".reveal-l,.reveal-r,.reveal-zoom,.section-title").forEach(function (el) { vObs.observe(el); });
+  } else {
+    doc.querySelectorAll(".reveal-l,.reveal-r,.reveal-zoom,.section-title").forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---- 5) カードのスポットライト（PCのみ） ---- */
+  if (fine && !reduce) {
+    doc.querySelectorAll(".cred,.feature,.voice-card").forEach(function (card) {
+      card.classList.add("spot");
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+        card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+      }, { passive: true });
+    });
+  }
+
+  /* ---- 6) マグネティックボタン（PCのみ） ---- */
+  if (fine && !reduce) {
+    doc.querySelectorAll(".btn-cta,.cover-cta").forEach(function (btn) {
+      var raf = 0, pend = null;
+      function move() {
+        raf = 0; if (!pend) return;
+        btn.style.transform = "translate(" + pend.x.toFixed(1) + "px," + pend.y.toFixed(1) + "px)";
+      }
+      btn.addEventListener("pointermove", function (e) {
+        var r = btn.getBoundingClientRect();
+        var mx = e.clientX - (r.left + r.width / 2);
+        var my = e.clientY - (r.top + r.height / 2);
+        pend = { x: mx * 0.25, y: my * 0.32 };
+        if (!raf) raf = requestAnimationFrame(move);
+      }, { passive: true });
+      btn.addEventListener("pointerleave", function () {
+        pend = null; if (raf) { cancelAnimationFrame(raf); raf = 0; }
+        btn.style.transform = "";
+      }, { passive: true });
+    });
+  }
+
+  /* ---- 7) リップル（クリック波紋） ---- */
+  doc.querySelectorAll(".btn-cta,.btn-contact,.cover-cta,.form button").forEach(function (btn) {
+    btn.addEventListener("pointerdown", function (e) {
+      if (reduce) return;
+      var r = btn.getBoundingClientRect();
+      var d = Math.max(r.width, r.height);
+      var ink = doc.createElement("span");
+      ink.className = "ripple-ink";
+      ink.style.width = ink.style.height = d + "px";
+      ink.style.left = (e.clientX - r.left - d / 2) + "px";
+      ink.style.top = (e.clientY - r.top - d / 2) + "px";
+      btn.appendChild(ink);
+      setTimeout(function () { if (ink.parentNode) ink.parentNode.removeChild(ink); }, 650);
+    }, { passive: true });
+  });
+
+  /* ---- 8) 表紙の浮遊バブル（PCのみ・控えめ） ---- */
+  if (!reduce) {
+    var frame = doc.querySelector(".cover__frame");
+    if (frame && !frame.querySelector(".cover__fx")) {
+      var fx = doc.createElement("div");
+      fx.className = "cover__fx"; fx.setAttribute("aria-hidden", "true");
+      var scrim = frame.querySelector(".cover__scrim");
+      if (scrim && scrim.nextSibling) frame.insertBefore(fx, scrim.nextSibling); else frame.appendChild(fx);
+      var N = 7;
+      for (var i = 0; i < N; i++) {
+        var b = doc.createElement("span");
+        b.className = "bubble";
+        var sz = 18 + Math.round(Math.random() * 46);
+        b.style.width = b.style.height = sz + "px";
+        b.style.left = Math.round(Math.random() * 96) + "%";
+        b.style.animationDuration = (12 + Math.random() * 12).toFixed(1) + "s";
+        b.style.animationDelay = (-Math.random() * 14).toFixed(1) + "s";
+        fx.appendChild(b);
+      }
+    }
+  }
+
+  /* ---- 9) カーソルグロウ（PCのみ） ---- */
+  if (fine && !reduce) {
+    var glow = doc.createElement("div");
+    glow.className = "cursor-glow"; glow.setAttribute("aria-hidden", "true");
+    body.appendChild(glow);
+    var gx = 0, gy = 0, gRAF = 0;
+    function gmove() { gRAF = 0; glow.style.transform = "translate(" + gx + "px," + gy + "px)"; }
+    window.addEventListener("pointermove", function (e) {
+      gx = e.clientX; gy = e.clientY; glow.classList.add("on");
+      if (!gRAF) gRAF = requestAnimationFrame(gmove);
+    }, { passive: true });
+    window.addEventListener("pointerleave", function () { glow.classList.remove("on"); });
+  }
 })();
