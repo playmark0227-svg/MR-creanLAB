@@ -1129,3 +1129,146 @@ html{ scroll-padding-top: 92px; }
   .cover__actions .btn-cta{ width:100%; justify-content:center; }
   .cover-tel-o{ width:100%; justify-content:center; }
 }
+
+/* =========================================================
+   v7 プレビュー用プロトタイプ層（既存 v1〜v6 を末尾で追加上書き）
+   - 方針：明度調整＋エッジマーキー＋cursor-tilt＋スライドショー土台。
+   - !important 不使用。prefers-reduced-motion / タッチ端末で安全に無効化。
+   - 既存 .cover__frame/.cover__bg/.cover__scrim/.cover__inner/.svc-o/.section.alt 等
+     の実在クラスのみ対象。reveal/hover の transform と衝突しない設計。
+   ========================================================= */
+
+:root{
+  /* --- トーン（明度のみ↑・彩度据え置き＝パステル回避） --- */
+  --bg-soft:   #f4f8fd;
+  --bg-soft-2: #eef4fc;
+  --bg-soft-line: #e6eefb;
+  /* --- スライドショー --- */
+  --cover-slide-interval: 6000ms; /* JSが参照 */
+  --cover-fade-duration: .9s;
+  /* --- エッジマーキー --- */
+  --marq-h: 22px;
+  --marq-h-sp: 16px;
+  --marq-speed: 40s;
+  --marq-speed-sp: 28s;
+  --marq-opacity: .42;
+  --marq-fs: 10px;
+  --marq-gap: 2.4em;
+  --marq-top: none;   /* 上帯OFF（ヘッダー干渉回避）。block でON */
+  --marq-z: 90;
+  /* --- tilt --- */
+  --tilt-max: 4.5deg;
+  --tilt-ease: .30s;
+}
+
+/* ---------- 1) 背景トーン（少し明るく・きっちり感維持） ---------- */
+.section.alt{
+  background:linear-gradient(180deg, var(--bg-soft) 0%, var(--bg-soft-2) 100%);
+  border-top:1px solid var(--bg-soft-line);
+  border-bottom:1px solid var(--bg-soft-line);
+}
+.trust-bar{ background:var(--bg-soft); }
+.area-band{ background:var(--bg-soft); }
+
+/* ---------- 2) ヒーロー スライドショー土台（クロスフェード） ---------- */
+/* JSが既存 .cover__bg を内包する .cover__slides を生成し、
+   追加スライド(.cover__slide)を append する。1枚目=既存img=LCP。 */
+.cover__slides{ position:absolute; inset:0; z-index:0; }
+.cover__slide{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:70% 18%;
+  opacity:0; transition:opacity var(--cover-fade-duration) ease;
+}
+.cover__slide.is-active{ opacity:1; }
+/* 既存 .cover__bg が slide 0 を兼ねる。スライド化された時のみ絶対配置を維持 */
+.cover__frame.has-slideshow .cover__bg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:70% 18%;
+  opacity:0; transition:opacity var(--cover-fade-duration) ease;
+}
+.cover__frame.has-slideshow .cover__bg.is-active{ opacity:1; }
+
+/* 操作ドット（控えめ・右下） */
+.cover__dots{
+  position:absolute; z-index:3;
+  right:clamp(16px,3vw,34px); bottom:clamp(14px,2.4vw,26px);
+  display:flex; gap:10px;
+}
+.cover__dots button{
+  width:9px; height:9px; padding:0; border:0; border-radius:50%; cursor:pointer;
+  background:rgba(255,255,255,.45); box-shadow:0 0 0 1px rgba(0,0,0,.12);
+  transition:background .25s ease, width .25s ease, border-radius .25s ease;
+}
+.cover__dots button:hover{ background:rgba(255,255,255,.75); }
+.cover__dots button.is-active{ width:24px; border-radius:5px; background:var(--color-orange); }
+.cover__dots button:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+
+/* ---------- 3) エッジ・マーキー ---------- */
+.edge-marquee{
+  position:fixed; left:0; right:0;
+  height:var(--marq-h); z-index:var(--marq-z);
+  overflow:hidden; pointer-events:none;
+  background:var(--bg-soft);
+  border-block:1px solid rgba(22,53,122,.10);
+  display:flex; align-items:center;
+}
+.edge-marquee--top{ top:0; display:var(--marq-top); }
+.edge-marquee--bottom{ bottom:0; }
+.edge-marquee__track{ display:flex; flex:none; min-width:200%; will-change:transform; }
+.edge-marquee__row{
+  display:inline-flex; align-items:center; flex:none;
+  gap:var(--marq-gap); padding-right:var(--marq-gap); white-space:nowrap;
+}
+.edge-marquee__row i{
+  font-style:normal; font-size:var(--marq-fs); font-weight:700;
+  letter-spacing:.42em; color:var(--color-navy);
+  opacity:var(--marq-opacity); text-transform:uppercase;
+}
+.edge-marquee--top .edge-marquee__track{ animation:edge-marq-l var(--marq-speed) linear infinite; }
+.edge-marquee--bottom .edge-marquee__track{ animation:edge-marq-r var(--marq-speed) linear infinite; }
+@keyframes edge-marq-l{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+@keyframes edge-marq-r{ from{ transform:translateX(-50%);} to{ transform:translateX(0);} }
+
+/* ---------- 4) cursor-tilt（.tilt-inner のみ動かす＝本体不可侵） ---------- */
+.tilt-inner{
+  transform-style:preserve-3d;
+  transition:transform var(--tilt-ease) ease;
+  will-change:transform;
+}
+.tilt-host.is-tilting .tilt-inner{ transition:none; }
+.svc-o.tilt-host.is-tilting{ box-shadow:0 26px 52px rgba(16,42,94,.20); }
+
+/* ---------- レスポンシブ：スマホ（≤680px・v6バンド整合） ---------- */
+@media (max-width:680px){
+  /* スライド群を v6 写真バンド寸法に合わせる */
+  .cover__frame.has-slideshow .cover__slides{ position:relative; inset:auto; width:100%; aspect-ratio:4/3; }
+  .cover__frame.has-slideshow .cover__slide{ position:absolute; inset:0; object-position:80% 50%; }
+  .cover__frame.has-slideshow .cover__bg{
+    position:relative; inset:auto; display:block;
+    width:100%; height:auto; aspect-ratio:4/3;
+    object-fit:cover; object-position:80% 50%;
+  }
+  .cover__dots{ right:14px; bottom:12px; }
+  /* エッジ帯：高さ・速度を簡略化／下帯は固定CTA(.mcta)優先で非表示 */
+  .edge-marquee{ height:var(--marq-h-sp); }
+  .edge-marquee--top .edge-marquee__track{ animation-duration:var(--marq-speed-sp); }
+  .edge-marquee--bottom{ display:none; }
+}
+
+/* ---------- reduced-motion：全演出を安全に停止 ---------- */
+@media (prefers-reduced-motion: reduce){
+  .cover__slide,
+  .cover__frame.has-slideshow .cover__bg{ transition:none; }
+  .cover__dots{ display:none; }
+  .edge-marquee{ display:none; }
+  .edge-marquee--top{ display:none; }
+  .tilt-inner{ transform:none; transition:none; }
+}
+/* ---------- タッチ／粗ポインタ端末：tilt無効（二重保険） ---------- */
+@media (hover:none), (pointer:coarse){
+  .tilt-inner{ transform:none; }
+}
+
+/* v7 補正：tilt-inner が .svc-o のフレックス縦積みを継承し、
+   カード内レイアウト（「詳しく見る」の下端固定・等高）を保つ */
+.svc-o.tilt-host > .tilt-inner{ display:flex; flex-direction:column; flex:1 1 auto; min-height:0; }
