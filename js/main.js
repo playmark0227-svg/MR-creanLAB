@@ -99,7 +99,7 @@
 var MRCL_ANIM = {
   MARQUEE_ENABLED: true,
   TILT_ENABLED: true,
-  SLIDESHOW_ENABLED: false /* 顔入り実画像が用意できるまでOFF（現状の顔表紙を維持）。画像投入後に true */
+  SLIDESHOW_ENABLED: true /* 顔入り実画像(cover-1〜4)で有効化 */
 };
 
 /* --- (A) エッジ・マーキー：CLEAN / LABO を縁に流す（DOM生成） --- */
@@ -185,10 +185,10 @@ var MRCL_ANIM = {
   });
 })();
 
-/* --- (C) ヒーロー スライドショー（プレースホルダ動作・クロスフェード） ---
-   実画像未生成のため、既存 .cover__bg を slide0 とし、
-   既存の他画像(hero-pest/drain/reform)をプレースホルダ slide として
-   動的に append する。実画像が揃ったら HTML を本実装に差し替える（notes参照）。 */
+/* --- (C) ヒーロー スライドショー（4事業のクロスフェード） ---
+   slide1 = 既存 .cover__bg（総合・LCP）。slide2〜4 を遅延読込で動的 append。
+   各スライドは object-position を個別指定し、PC（縦クロップ）/スマホ（4:3バンドの
+   横クロップ）双方で顔が切れないよう調整。 */
 (function () {
   "use strict";
   if (!MRCL_ANIM.SLIDESHOW_ENABLED) return;
@@ -198,33 +198,36 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  /* プレビュー用プレースホルダ（既存画像を流用）。
-     ※実装時は images/cover/slide-2..4.* に差し替え（notes参照）。 */
-  var PLACEHOLDERS = [
-    { src: "images/hero-pest.jpg?v=20260630a",   alt: "害虫害獣の調査を行うスタッフ（プレースホルダ）" },
-    { src: "images/hero-drain.jpg?v=20260630a",  alt: "排水管洗浄・グリーストラップ清掃（プレースホルダ）" },
-    { src: "images/hero-reform.jpg?v=20260630a", alt: "ハウスクリーニング・内装リフォーム（プレースホルダ）" }
+  var VER = "?v=20260630b";
+  /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
+  var SLIDES = [
+    { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "52% 30%" },
+    { src: "images/cover-3.jpg" + VER, alt: "キッチンの排水・水まわりを作業するスタッフ", pos: "64% 32%" },
+    { src: "images/cover-4.jpg" + VER, alt: "リフォーム・ハウスクリーニングを行うスタッフ", pos: "56% 34%" }
   ];
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* slide 群コンテナを作り、既存 .cover__bg を slide0 として内包 */
+  /* slide 群コンテナを作り、既存 .cover__bg を slide1 として内包 */
   var slides = document.createElement("div");
   slides.className = "cover__slides";
   slides.setAttribute("aria-hidden", "true");
   baseImg.parentNode.insertBefore(slides, baseImg);
-  slides.appendChild(baseImg);          /* slide0 = LCP（既存imgそのまま） */
+  slides.appendChild(baseImg);          /* slide1 = LCP（既存imgそのまま） */
   baseImg.classList.add("cover__slide", "is-active");
+  baseImg.style.objectPosition = "72% 28%"; /* 総合カット：女性が右寄り */
+  if (!baseImg.getAttribute("alt")) baseImg.alt = "札幌の総合クリーンサービス MR.クリーンラボのスタッフ";
   frame.classList.add("has-slideshow");
 
   /* 追加スライド（遅延読込・LCP非関与） */
-  PLACEHOLDERS.forEach(function (p) {
+  SLIDES.forEach(function (p) {
     var img = document.createElement("img");
     img.className = "cover__slide";
     img.src = p.src;
     img.alt = p.alt;
     img.loading = "lazy";
     img.decoding = "async";
+    img.style.objectPosition = p.pos;
     try { img.fetchPriority = "low"; } catch (e) {}
     img.onerror = function () { if (img.parentNode) img.parentNode.removeChild(img); rebuild(); };
     slides.appendChild(img);
