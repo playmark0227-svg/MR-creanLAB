@@ -1413,3 +1413,145 @@ html{ scroll-padding-top: 92px; }
   .cursor-glow{ display:none; }
   .spot::after{ display:none; }
 }
+
+/* =========================================================
+   v9 リッチモーション＆洗練レイヤー
+   - デザイン洗練：ガラス質ヘッダー / フォーム / チップ / スクロールバー等
+   - モーション：文字ステガー・パララックス・ワイプ・グリッド順次登場・
+     ページ遷移フェード・マーキー化 など全部盛り
+   - JSが付与するクラス（.g-item/.anim-in/.cin等）が無ければ静的表示のまま
+   ========================================================= */
+
+/* ---- 洗練0：質感の底上げ ---- */
+body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+::selection{ background:rgba(239,130,0,.30); }
+html{ scrollbar-width:thin; scrollbar-color:#b9cbe8 #f1f5fb; }
+::-webkit-scrollbar{ width:11px; }
+::-webkit-scrollbar-track{ background:#f1f5fb; }
+::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,#2f6fce,#16357a); border-radius:8px; border:2px solid #f1f5fb; }
+
+/* ガラス質の固定ヘッダー */
+.site-header{ background:rgba(255,255,255,.9); -webkit-backdrop-filter:blur(12px) saturate(1.5); backdrop-filter:blur(12px) saturate(1.5); }
+.tel-btn,.btn-contact{ border-radius:8px; }
+
+/* フォームのフォーカス体験 */
+.form input,.form textarea,.form select{ transition:border-color .25s ease, box-shadow .25s ease; }
+.form input:focus,.form textarea:focus,.form select:focus{ outline:none; border-color:var(--color-blue); box-shadow:0 0 0 4px rgba(31,95,192,.14); }
+
+/* チップ・リンクのマイクロホバー */
+.cities span,.tag-list li{ transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.cities span:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:var(--color-blue); }
+.tag-list li:hover{ transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+.footer-col a{ transition:color .2s ease, padding-left .2s ease; }
+.footer-col a:hover{ padding-left:6px; }
+.news-list li{ transition:background .25s ease; }
+.news-list li:hover{ background:#f6f9fe; }
+
+/* 事業内容の補足をチップカード化 */
+.svc-over-note{ width:fit-content; margin-inline:auto; background:#fff; border:1px solid #e6ecf4; border-radius:40px; padding:10px 26px; box-shadow:var(--shadow-sm); }
+
+/* FAQ開時の強調 */
+.faq-acc .item{ transition:border-color .3s ease, box-shadow .3s ease; }
+.faq-acc .item.open{ border-color:var(--color-blue); box-shadow:var(--shadow-md); }
+.faq-acc .q:active{ transform:scale(.995); }
+
+/* アクセント語のシマー（青/橙のまま光が流れる） */
+@supports (-webkit-background-clip:text){
+  .section-title .accent{
+    background:linear-gradient(100deg,#1f5fc0 0%,#1f5fc0 42%,#7fb2ff 50%,#1f5fc0 58%,#1f5fc0 100%);
+    background-size:230% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:v9-shimmer 4s linear infinite;
+  }
+  .problem-cap .accent{
+    background:linear-gradient(100deg,#ef8200 0%,#ef8200 42%,#ffb659 50%,#ef8200 58%,#ef8200 100%);
+    background-size:230% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:v9-shimmer 4s linear infinite;
+  }
+}
+@keyframes v9-shimmer{ from{ background-position:0% 0; } to{ background-position:-230% 0; } }
+
+/* ---- 表紙エントランス（JSが .cin / .ch / .cover-in を付与） ---- */
+.cin{ opacity:0; transform:translateY(20px); transition:opacity .8s ease var(--cd,0ms), transform .8s cubic-bezier(.2,.7,.2,1) var(--cd,0ms); }
+.cover-in .cin{ opacity:1; transform:none; }
+.cover__title .ch{ display:inline-block; opacity:0; transform:translateY(.6em) rotate(3deg); }
+.cover-in .cover__title .ch{ animation:v9-ch .68s cubic-bezier(.2,.75,.15,1) both; animation-delay:var(--cd,0ms); }
+@keyframes v9-ch{ to{ opacity:1; transform:none; } }
+/* trust チェックの線描画 */
+.cover__trust .ck path{ stroke-dasharray:1; stroke-dashoffset:1; }
+.cover-in .cover__trust .ck path{ animation:v9-draw .55s ease forwards; animation-delay:var(--cd,700ms); }
+@keyframes v9-draw{ to{ stroke-dashoffset:0; } }
+
+/* スクロールキュー（マウス型） */
+.scroll-cue{ position:absolute; left:50%; bottom:20px; transform:translateX(-50%); z-index:3; width:26px; height:42px; border:2px solid rgba(255,255,255,.7); border-radius:14px; pointer-events:none; opacity:.9; transition:opacity .4s ease; }
+.scroll-cue::before{ content:""; position:absolute; left:50%; top:7px; width:4px; height:9px; margin-left:-2px; border-radius:2px; background:#fff; animation:v9-cue 1.8s ease infinite; }
+.scroll-cue.hide{ opacity:0; }
+@keyframes v9-cue{ 0%{ transform:translateY(0); opacity:1; } 70%{ transform:translateY(14px); opacity:0; } 100%{ opacity:0; } }
+@media (max-width:680px){ .scroll-cue{ display:none; } }
+
+/* ---- グリッド順次登場（JSが .g-host/.g-item/--gd を付与） ---- */
+.g-host .g-item{ opacity:0; transform:translateY(26px) scale(.985); transition:opacity .6s ease var(--gd,0ms), transform .6s cubic-bezier(.2,.6,.2,1) var(--gd,0ms); }
+.g-host.anim-in .g-item{ opacity:1; transform:none; }
+.g-host.anim-in .step.g-item::before{ animation:wow-pop .55s both; animation-delay:calc(var(--gd,0ms) + 220ms); }
+
+/* 画像のワイプ登場（JSが .wipe を付与） */
+.wipe{ position:relative; }
+.wipe::after{ content:""; position:absolute; inset:0; background:linear-gradient(120deg,#f4f8fd,#eaf2fb); transform:translateX(0); transition:transform .9s cubic-bezier(.65,0,.2,1) .1s; z-index:2; }
+.wipe.anim-in::after{ transform:translateX(101%); }
+.wipe img{ transition:transform 1.2s ease .1s, filter 1.2s ease .1s; transform:scale(1.08); filter:saturate(.85); }
+.wipe.anim-in img{ transform:scale(1); filter:none; }
+
+/* 信頼バーの無限マーキー（JSがul複製） */
+.tb-marq{ overflow:hidden; display:flex; flex:1; min-width:0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
+.tb-marq ul{ flex:none; display:flex; flex-wrap:nowrap; animation:v9-tb 26s linear infinite; padding-right:10px; }
+.tb-marq:hover ul{ animation-play-state:paused; }
+@keyframes v9-tb{ to{ transform:translateX(-100%); } }
+@media (max-width:600px){ .tb-marq{ flex-basis:100%; } }
+
+/* モバイルナビの順次スライドイン */
+.global-nav.is-open li{ opacity:0; transform:translateX(-14px); animation:v9-nav .38s ease forwards; }
+.global-nav.is-open li:nth-child(1){ animation-delay:.03s; } .global-nav.is-open li:nth-child(2){ animation-delay:.07s; }
+.global-nav.is-open li:nth-child(3){ animation-delay:.11s; } .global-nav.is-open li:nth-child(4){ animation-delay:.15s; }
+.global-nav.is-open li:nth-child(5){ animation-delay:.19s; } .global-nav.is-open li:nth-child(6){ animation-delay:.23s; }
+@keyframes v9-nav{ to{ opacity:1; transform:none; } }
+
+/* CTA矢印の誘い / ヘッダー電話のさりげない揺れ */
+.btn-cta svg{ animation:v9-nudge 1.9s ease infinite; }
+@keyframes v9-nudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+.tel-btn{ animation:v9-wiggle 8s ease-in-out infinite; transform-origin:50% 20%; }
+@keyframes v9-wiggle{ 0%,86%,100%{ transform:rotate(0); } 89%{ transform:rotate(1.6deg); } 92%{ transform:rotate(-1.6deg); } 95%{ transform:rotate(.8deg); } }
+
+/* ホバー小技：アイコン浮遊・星の輝き */
+.cred .ic{ transition:transform .3s ease; }
+.cred:hover .ic{ transform:translateY(-4px) rotate(-6deg) scale(1.06); }
+.service-card:hover .ph svg{ animation:wow-pop .5s both; }
+.voice-card .stars{ transition:text-shadow .3s ease; }
+.voice-card:hover .stars{ text-shadow:0 0 14px rgba(245,166,35,.9); }
+
+/* ページトップに進捗リング */
+.pagetop::after{
+  content:""; position:absolute; inset:-4px; border-radius:50%;
+  background:conic-gradient(var(--color-orange) calc(var(--scrollp,0)*1%), rgba(22,53,122,.12) 0);
+  -webkit-mask:radial-gradient(closest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+  mask:radial-gradient(closest-side, transparent calc(100% - 6px), #000 calc(100% - 5px));
+}
+
+/* プリローダー％ */
+.preloader__num{ font-weight:700; font-size:13px; letter-spacing:.1em; color:var(--color-navy); font-variant-numeric:tabular-nums; }
+
+/* ページ遷移ベール */
+.page-veil{ position:fixed; inset:0; background:#fff; opacity:0; visibility:hidden; transition:opacity .22s ease, visibility 0s linear .22s; z-index:9990; pointer-events:none; }
+.page-veil.show{ opacity:1; visibility:visible; transition:opacity .22s ease; }
+
+/* ---- 無効化（reduced-motion / タッチ） ---- */
+@media (prefers-reduced-motion: reduce){
+  .cin,.cover__title .ch{ opacity:1; transform:none; transition:none; animation:none; }
+  .cover__trust .ck path{ stroke-dasharray:none; stroke-dashoffset:0; animation:none; }
+  .scroll-cue,.page-veil{ display:none; }
+  .g-host .g-item{ opacity:1; transform:none; transition:none; }
+  .wipe::after{ display:none; } .wipe img{ transform:none; filter:none; transition:none; }
+  .tb-marq ul{ animation:none; }
+  .global-nav.is-open li{ opacity:1; transform:none; animation:none; }
+  .btn-cta svg,.tel-btn{ animation:none; }
+  .section-title .accent,.problem-cap .accent{ animation:none; }
+  .pagetop::after{ display:none; }
+}

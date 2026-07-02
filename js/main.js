@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260630d";
+  var VER = "?v=20260701a";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -445,5 +445,186 @@ var MRCL_ANIM = {
       if (!gRAF) gRAF = requestAnimationFrame(gmove);
     }, { passive: true });
     window.addEventListener("pointerleave", function () { glow.classList.remove("on"); });
+  }
+})();
+
+/* =========================================================
+   v9 リッチモーション JS（依存なし・IIFE・既存と非競合）
+   すべて reduced-motion で自動無効。要素が無いページでは何もしない。
+   ========================================================= */
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var doc = document, body = doc.body;
+
+  /* 共通オブザーバ（v9専用） */
+  var obs = ("IntersectionObserver" in window && !reduce)
+    ? new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) {
+            var el = e.target;
+            el.classList.add("anim-in");
+            obs.unobserve(el);
+            /* 登場完了後に g-item を外し、:hover の transform と競合させない */
+            var kids = el.querySelectorAll(".g-item");
+            if (kids.length) {
+              setTimeout(function () {
+                kids.forEach(function (k) { k.classList.remove("g-item"); });
+              }, kids.length * 90 + 800);
+            }
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" })
+    : null;
+  function watch(el) { if (obs) obs.observe(el); else el.classList.add("anim-in"); }
+
+  /* ---- 1) グリッドの順次登場（子要素へ自動ステガー付与） ---- */
+  if (!reduce) {
+    var GRIDS = ".features,.steps,.cards-4,.service-grid,.creds,.svc-over,.stats .grid,.faq-acc,.cities,.tag-list,.problem-list,.checklist,.footer-main,.cta-band,.cta-photo,.sec-head";
+    doc.querySelectorAll(GRIDS).forEach(function (grid) {
+      var kids = Array.prototype.slice.call(grid.children).filter(function (k) { return k.nodeType === 1; });
+      if (!kids.length) return;
+      kids.forEach(function (k, i) {
+        k.classList.remove("reveal", "d1", "d2", "d3"); /* 旧revealと二重にしない */
+        k.classList.add("g-item");
+        k.style.setProperty("--gd", (i * 90) + "ms");
+      });
+      grid.classList.add("g-host");
+      watch(grid);
+    });
+  }
+
+  /* ---- 2) 画像のワイプ登場 ---- */
+  if (!reduce) {
+    doc.querySelectorAll(".lp-split .media,.svc-o__media,.voice-card .media").forEach(function (m) {
+      m.classList.add("wipe");
+      watch(m);
+    });
+  }
+
+  /* ---- 3) 表紙エントランス（文字ステガー＋要素順次＋チェック描画） ---- */
+  (function () {
+    var frame = doc.querySelector(".cover__frame");
+    if (!frame || reduce) return;
+    var title = frame.querySelector(".cover__title");
+    if (title && !title.querySelector(".ch")) {
+      var idx = 0;
+      Array.prototype.slice.call(title.childNodes).forEach(function (node) {
+        if (node.nodeType !== 3) return; /* <br>は保持 */
+        var fragment = doc.createDocumentFragment();
+        node.nodeValue.split("").forEach(function (c) {
+          if (c === " " || c === "\n") { fragment.appendChild(doc.createTextNode(c)); return; }
+          var s = doc.createElement("span");
+          s.className = "ch"; s.textContent = c;
+          s.style.setProperty("--cd", (120 + idx * 34) + "ms");
+          fragment.appendChild(s); idx++;
+        });
+        title.replaceChild(fragment, node);
+      });
+    }
+    [[".cover__eyebrow", 0], [".cover__lead", 520], [".cover__trust", 660], [".cover__actions", 820]].forEach(function (t) {
+      var el = frame.querySelector(t[0]);
+      if (el) { el.classList.add("cin"); el.style.setProperty("--cd", t[1] + "ms"); }
+    });
+    frame.querySelectorAll(".cover__trust .ck path").forEach(function (p, i) {
+      try { p.setAttribute("pathLength", "1"); } catch (e) {}
+      p.style.setProperty("--cd", (700 + i * 140) + "ms");
+    });
+    /* スクロールキュー */
+    if (!frame.querySelector(".scroll-cue")) {
+      var cue = doc.createElement("div");
+      cue.className = "scroll-cue"; cue.setAttribute("aria-hidden", "true");
+      frame.appendChild(cue);
+      window.addEventListener("scroll", function () {
+        cue.classList.toggle("hide", (window.scrollY || 0) > 90);
+      }, { passive: true });
+    }
+    function go() { setTimeout(function () { frame.classList.add("cover-in"); }, 250); }
+    if (doc.readyState === "complete") go(); else window.addEventListener("load", go);
+  })();
+
+  /* ---- 4) 表紙パララックス（PCのみ・スクロールで文字がゆっくり退く） ---- */
+  if (!reduce) {
+    var pxInner = doc.querySelector(".cover__inner");
+    var pxFrame = doc.querySelector(".cover__frame");
+    if (pxInner && pxFrame) {
+      var pxRAF = 0;
+      function pxUpd() {
+        pxRAF = 0;
+        if (window.innerWidth <= 680) { pxInner.style.transform = ""; pxInner.style.opacity = ""; return; }
+        var y = window.scrollY || 0, h = pxFrame.offsetHeight || 1;
+        if (y < h) {
+          pxInner.style.transform = "translateY(" + (y * 0.18).toFixed(1) + "px)";
+          pxInner.style.opacity = Math.max(0, 1 - y / (h * 0.85)).toFixed(3);
+        }
+      }
+      window.addEventListener("scroll", function () { if (!pxRAF) pxRAF = requestAnimationFrame(pxUpd); }, { passive: true });
+    }
+  }
+
+  /* ---- 5) 信頼バーを無限マーキー化 ---- */
+  if (!reduce) {
+    doc.querySelectorAll(".trust-bar .in").forEach(function (box) {
+      var ul = box.querySelector("ul");
+      if (!ul || box.querySelector(".tb-marq")) return;
+      var wrap = doc.createElement("div");
+      wrap.className = "tb-marq";
+      ul.parentNode.insertBefore(wrap, ul);
+      wrap.appendChild(ul);
+      var clone = ul.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      wrap.appendChild(clone);
+    });
+  }
+
+  /* ---- 6) ページトップの進捗リング ---- */
+  (function () {
+    var rRAF = 0;
+    function upd() {
+      rRAF = 0;
+      var h = doc.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(100, (window.scrollY || 0) / h * 100) : 0;
+      doc.documentElement.style.setProperty("--scrollp", p.toFixed(1));
+    }
+    window.addEventListener("scroll", function () { if (!rRAF) rRAF = requestAnimationFrame(upd); }, { passive: true });
+    upd();
+  })();
+
+  /* ---- 7) プリローダー％カウンタ ---- */
+  (function () {
+    var pl = doc.getElementById("preloader");
+    if (!pl || reduce) return;
+    var inner = pl.querySelector(".preloader__inner");
+    if (!inner) return;
+    var num = doc.createElement("div");
+    num.className = "preloader__num"; num.textContent = "0%";
+    inner.appendChild(num);
+    var t0 = null;
+    function step(ts) {
+      if (!pl.parentNode) return;
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / 1000, 1);
+      num.textContent = Math.round(100 * (1 - Math.pow(1 - p, 2))) + "%";
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+
+  /* ---- 8) ページ遷移フェード（内部.htmlリンクのみ） ---- */
+  if (!reduce) {
+    var veil = doc.createElement("div");
+    veil.className = "page-veil"; veil.setAttribute("aria-hidden", "true");
+    body.appendChild(veil);
+    doc.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest ? e.target.closest("a") : null;
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      var href = a.getAttribute("href") || "";
+      if (!/\.html(\?|#|$)/.test(href) || /^(https?:)?\/\//.test(href)) return;
+      e.preventDefault();
+      veil.classList.add("show");
+      setTimeout(function () { location.href = href; }, 220);
+    });
+    window.addEventListener("pageshow", function () { veil.classList.remove("show"); });
   }
 })();
