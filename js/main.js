@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260701a";
+  var VER = "?v=20260702a";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -233,7 +233,7 @@ var MRCL_ANIM = {
     slides.appendChild(img);
   });
 
-  var items = [], dots = [], i = 0, timer = null, paused = false, dotsWrap = null;
+  var items = [], dots = [], i = 0, timer = null, paused = false, userPaused = false, dotsWrap = null;
   var INTERVAL = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--cover-slide-interval"), 10) || 6000;
 
   function rebuild() {
@@ -245,31 +245,52 @@ var MRCL_ANIM = {
   /* ドット生成 */
   dotsWrap = document.createElement("div");
   dotsWrap.className = "cover__dots";
-  dotsWrap.setAttribute("role", "tablist");
+  dotsWrap.setAttribute("role", "group");
   dotsWrap.setAttribute("aria-label", "ヒーロー画像の切り替え");
   frame.appendChild(dotsWrap);
   items.forEach(function (s, idx) {
     var b = document.createElement("button");
     b.type = "button";
-    b.setAttribute("role", "tab");
     b.setAttribute("aria-label", (idx + 1) + "枚目を表示");
-    b.setAttribute("aria-selected", idx === 0 ? "true" : "false");
+    b.setAttribute("aria-current", idx === 0 ? "true" : "false");
     if (idx === 0) b.classList.add("is-active");
-    b.addEventListener("click", function () { stop(); show(idx); start(); });
+    b.addEventListener("click", function () { stop(); show(idx); if (!userPaused) start(); });
     dotsWrap.appendChild(b);
     dots.push(b);
   });
+  /* キーボード左右で切替 */
+  dotsWrap.addEventListener("keydown", function (e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    stop(); show(i + (e.key === "ArrowRight" ? 1 : -1));
+    if (dots[i]) dots[i].focus();
+    if (!userPaused) start();
+  });
+  /* 一時停止/再生ボタン（WCAG 2.2.2 自動送りの停止手段） */
+  var ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+  var ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  var pauseBtn = document.createElement("button");
+  pauseBtn.type = "button";
+  pauseBtn.className = "cover__pause";
+  pauseBtn.innerHTML = ICON_PAUSE;
+  pauseBtn.setAttribute("aria-label", "スライドショーを一時停止");
+  pauseBtn.addEventListener("click", function () {
+    userPaused = !userPaused;
+    if (userPaused) { stop(); pauseBtn.innerHTML = ICON_PLAY; pauseBtn.setAttribute("aria-label", "スライドショーを再生"); }
+    else { pauseBtn.innerHTML = ICON_PAUSE; pauseBtn.setAttribute("aria-label", "スライドショーを一時停止"); start(); }
+  });
+  frame.appendChild(pauseBtn);
 
   function show(n) {
     n = (n + items.length) % items.length;
     if (items[i]) items[i].classList.remove("is-active");
     if (items[n]) items[n].classList.add("is-active");
-    if (dots[i]) { dots[i].classList.remove("is-active"); dots[i].setAttribute("aria-selected", "false"); }
-    if (dots[n]) { dots[n].classList.add("is-active"); dots[n].setAttribute("aria-selected", "true"); }
+    if (dots[i]) { dots[i].classList.remove("is-active"); dots[i].setAttribute("aria-current", "false"); }
+    if (dots[n]) { dots[n].classList.add("is-active"); dots[n].setAttribute("aria-current", "true"); }
     i = n;
   }
   function next() { show(i + 1); }
-  function start() { if (reduce || paused || timer) return; timer = setInterval(next, INTERVAL); }
+  function start() { if (reduce || paused || userPaused || timer) return; timer = setInterval(next, INTERVAL); }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
 
   if (reduce) return; /* 1枚目で静止・自動送りなし */
@@ -627,4 +648,41 @@ var MRCL_ANIM = {
     });
     window.addEventListener("pageshow", function () { veil.classList.remove("show"); });
   }
+})();
+
+/* =========================================================
+   v10 本番対応 JS（フォームtype連携 / FAQ ARIA / 依存なし・非競合）
+   ========================================================= */
+(function () {
+  "use strict";
+  var doc = document;
+
+  /* --- 1) 法人CTA ?type=corporate → お問い合わせ内容を法人にプリセット --- */
+  (function () {
+    var sel = doc.getElementById("category");
+    if (!sel) return;
+    var type = null;
+    try { type = new URLSearchParams(location.search).get("type"); } catch (e) {}
+    if (type === "corporate") {
+      var opt = sel.querySelector('option[value="corporate"]');
+      if (opt) sel.value = "corporate";
+    }
+  })();
+
+  /* --- 2) FAQ: aria-controls 付与＋閉時は inert でAT/タブ順から除外 --- */
+  doc.querySelectorAll(".faq-acc .item").forEach(function (item, idx) {
+    var q = item.querySelector(".q");
+    var panel = item.querySelector(".a");
+    if (!q || !panel) return;
+    var id = panel.id || ("faq-panel-" + (idx + 1));
+    panel.id = id;
+    q.setAttribute("aria-controls", id);
+    function sync() {
+      var open = item.classList.contains("open");
+      if (open) { panel.removeAttribute("inert"); }
+      else { panel.setAttribute("inert", ""); }
+    }
+    sync();                                  /* 初期（閉）でinert付与 */
+    q.addEventListener("click", sync);       /* 既存ハンドラ(.open切替)の後に走り最新状態を反映 */
+  });
 })();

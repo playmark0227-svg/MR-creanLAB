@@ -3,7 +3,7 @@
    スクリーンショットを元に再構築した近似デザイン。
    配色・余白は CSS 変数で調整しやすくしています（後のデザイン改造用）。
    ========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap');
+/* フォントは各ページ head の <link> でロード（@importのレンダリングブロック回避） */
 
 :root {
   --color-navy: #16357a;       /* 濃紺（ヒーロー帯・見出し） */
@@ -1554,4 +1554,72 @@ html{ scrollbar-width:thin; scrollbar-color:#b9cbe8 #f1f5fb; }
   .btn-cta svg,.tel-btn{ animation:none; }
   .section-title .accent,.problem-cap .accent{ animation:none; }
   .pagetop::after{ display:none; }
+}
+
+/* =========================================================
+   v10 本番堅牢化レイヤー（JSフォールバック / 印刷 / タッチ / safe-area）
+   ========================================================= */
+
+/* --- JS非実行時フォールバック：隠し系を全て可視化（.js は main実行前にheadで付与） --- */
+html:not(.js) .reveal,
+html:not(.js) .reveal-l,
+html:not(.js) .reveal-r,
+html:not(.js) .reveal-zoom,
+html:not(.js) .g-host .g-item,
+html:not(.js) .cin,
+html:not(.js) .cover__title .ch{ opacity:1 !important; transform:none !important; filter:none !important; }
+html:not(.js) .wipe::after{ display:none !important; }
+html:not(.js) .cover__trust .ck path{ stroke-dashoffset:0 !important; }
+html:not(.js) .preloader{ display:none !important; }
+
+/* プリローダーのフェイルセーフ：JSが動かなくても数秒で必ず退場（白幕固着の防止） */
+.preloader{ animation: pl-failsafe .01s linear 4.5s forwards; }
+@keyframes pl-failsafe{ to{ opacity:0; visibility:hidden; pointer-events:none; } }
+
+/* スキップリンク */
+.skip-link{ position:absolute; left:10px; top:-52px; z-index:9999; background:var(--color-navy); color:#fff; padding:10px 18px; border-radius:0 0 10px 10px; font-weight:700; box-shadow:var(--shadow-md); transition:top .2s ease; }
+.skip-link:focus{ top:0; outline:3px solid var(--color-orange); outline-offset:2px; }
+
+/* スライドショー：一時停止/再生ボタン */
+.cover__pause{ position:absolute; z-index:3; right:clamp(16px,3vw,34px); bottom:calc(clamp(14px,2.4vw,26px) + 20px); width:34px; height:34px; border-radius:50%; border:0; cursor:pointer; background:rgba(255,255,255,.85); color:var(--color-navy); display:grid; place-items:center; box-shadow:0 4px 12px rgba(0,0,0,.18); }
+.cover__pause:hover{ background:#fff; }
+.cover__pause:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+.cover__pause svg{ width:15px; height:15px; }
+@media (max-width:680px){ .cover__pause{ top:auto; bottom:calc(12px + 20px); } }
+
+/* iOS Safari ガラス効果の接頭辞補完 */
+.mcta{ -webkit-backdrop-filter:blur(8px); }
+
+/* タッチ端末：:hover 変形の固着を解消 */
+@media (hover:none){
+  .cities span:hover,.tag-list li:hover{ transform:none; box-shadow:none; }
+  .faq-acc .q:hover{ background:none; }
+  .faq-acc .q:hover .qm{ background:var(--color-blue-light); color:var(--color-blue); }
+  .footer-col a:hover{ padding-left:0; }
+  .service-card:hover .media img,.svc-o:hover .svc-o__media img{ transform:none; }
+  .cred:hover .ic{ transform:none; }
+  .voice-card:hover .stars{ text-shadow:none; }
+}
+
+/* ノッチ端末の下部 safe-area（固定CTAに本文末尾が隠れない） */
+@media (max-width:900px){
+  body{ padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* 印刷：装飾/固定要素を消し、暗背景を白地黒文字に */
+@media print{
+  .preloader,.edge-marquee,.cursor-glow,.scroll-cue,.page-veil,.scroll-prog,
+  .mcta,.pagetop,.cover__fx,.cover__dots,.cover__pause,.nav-toggle{ display:none !important; }
+  *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; box-shadow:none !important; text-shadow:none !important; }
+  .stats,.cta-band,.cta-photo,.cover,.cover__frame,.cover__scrim,.page-hero,.site-footer,.section.alt{ background:#fff !important; }
+  .stats *,.cta-band *,.cta-photo *,.cover__inner *,.page-hero *,.site-footer *{ color:#000 !important; }
+  .reveal,.reveal-l,.reveal-r,.reveal-zoom,.g-item,.cin,.cover__title .ch{ opacity:1 !important; transform:none !important; filter:none !important; }
+  a{ color:#000 !important; }
+  body{ padding-bottom:0 !important; }
+}
+
+/* v10b: モバイル折り畳みナビを閉時にタブ順・AT木から除外 */
+@media (max-width:768px){
+  .global-nav{ visibility:hidden; transition:max-height .32s ease, visibility 0s linear .34s; }
+  .global-nav.is-open{ visibility:visible; transition:max-height .32s ease, visibility 0s; }
 }
