@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260702a";
+  var VER = "?v=20260830a";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -684,5 +684,67 @@ var MRCL_ANIM = {
     }
     sync();                                  /* 初期（閉）でinert付与 */
     q.addEventListener("click", sync);       /* 既存ハンドラ(.open切替)の後に走り最新状態を反映 */
+  });
+})();
+
+/* =========================================================
+   v11 お問い合わせフォーム送信
+   ★設定はここだけ：ENDPOINT に Formspree 等の送信先URLを入れると即稼働します。
+     例）ENDPOINT: "https://formspree.io/f/xxxxxxxx"
+     空のままの場合は「送信できた」と誤認させず、電話でのご連絡をご案内します。
+   ========================================================= */
+var MRCL_FORM = {
+  ENDPOINT: "",                       /* ← 送信先URL（未設定時は電話案内にフォールバック） */
+  TEL: "011-252-7865",
+  THANKS: "お問い合わせありがとうございます。担当者より折り返しご連絡いたしますので、少々お待ちください。"
+};
+
+(function () {
+  "use strict";
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var status = document.getElementById("form-status");
+
+  function setStatus(msg, kind) {
+    if (!status) return;
+    status.textContent = msg;
+    status.classList.remove("is-error", "is-ok");
+    if (kind) status.classList.add(kind);
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    /* 標準バリデーション（未入力・形式不正・同意未チェック） */
+    if (!form.checkValidity()) {
+      var bad = form.querySelector(":invalid");
+      setStatus("未入力または内容に誤りのある項目があります。ご確認ください。", "is-error");
+      if (bad && bad.focus) bad.focus();
+      if (bad && bad.reportValidity) bad.reportValidity();
+      return;
+    }
+
+    /* 送信先が未設定のうちは、成功したように見せずお電話をご案内 */
+    if (!MRCL_FORM.ENDPOINT) {
+      setStatus("申し訳ありません。ただいまフォームからの送信を準備中です。お急ぎの場合はお電話（" + MRCL_FORM.TEL + "／受付 9:00〜18:00）にてご連絡ください。", "is-error");
+      return;
+    }
+
+    form.classList.add("is-sending");
+    setStatus("送信しています…");
+
+    fetch(MRCL_FORM.ENDPOINT, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    }).then(function (res) {
+      if (!res.ok) throw new Error("bad status " + res.status);
+      form.reset();
+      setStatus(MRCL_FORM.THANKS, "is-ok");
+    }).catch(function () {
+      setStatus("送信に失敗しました。通信環境をご確認のうえ再度お試しいただくか、お電話（" + MRCL_FORM.TEL + "）にてご連絡ください。", "is-error");
+    }).then(function () {
+      form.classList.remove("is-sending");
+    });
   });
 })();

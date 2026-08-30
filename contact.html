@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=20260702a">
+  <link rel="stylesheet" href="css/style.css?v=20260830a">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へスキップ</a>
@@ -73,7 +73,7 @@
     <div class="container">
       <p class="section-lead">ご相談・お見積り・現地調査は無料です。お電話（011-252-7865）または下記フォームよりお気軽にお問い合わせください。</p>
 
-      <form class="form" action="#" method="post" onsubmit="return false;">
+      <form class="form" id="contact-form" method="post" novalidate>
         <div class="row">
           <label for="name">お名前<span class="req">必須</span></label>
           <input type="text" id="name" name="name" autocomplete="name" required>
@@ -105,8 +105,15 @@
           <label for="message">お問い合わせ詳細<span class="req">必須</span></label>
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
+        <div class="row consent">
+          <label class="consent-label" for="agree">
+            <input type="checkbox" id="agree" name="agree" required>
+            <span><a href="privacy.html">プライバシーポリシー</a>に同意のうえ送信してください<span class="req">必須</span></span>
+          </label>
+        </div>
         <div class="submit">
           <button type="submit">送信する</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </div>
       </form>
     </div>
@@ -138,6 +145,7 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="news.html">お知らせ</a></li>
           <li><a href="contact.html">お問い合わせ</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
         </ul>
       </div>
     </div>
@@ -149,7 +157,7 @@
     <a class="req" href="contact.html">無料で相談する</a>
   </div>
   <a class="pagetop" href="#" aria-label="ページ上部へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
-  <script src="js/main.js?v=20260702a" defer></script>
+  <script src="js/main.js?v=20260830a" defer></script>
 
 </body>
 </html>
