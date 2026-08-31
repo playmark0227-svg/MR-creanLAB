@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260830d";
+  var VER = "?v=20260830f";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -560,8 +560,17 @@ var MRCL_ANIM = {
         cue.classList.toggle("hide", (window.scrollY || 0) > 90);
       }, { passive: true });
     }
-    function go() { setTimeout(function () { frame.classList.add("cover-in"); }, 250); }
-    if (doc.readyState === "complete") go(); else window.addEventListener("load", go);
+    var started = false;
+    function go() {
+      if (started) return; started = true;
+      setTimeout(function () { frame.classList.add("cover-in"); }, 250);
+    }
+    if (doc.getElementById("opening")) {
+      /* オープニング再生中は待機し、終了後に表紙の登場演出を見せる */
+      doc.addEventListener("mrcl:opening-done", go, { once: true });
+      setTimeout(go, 6000);                 /* 保険 */
+    } else if (doc.readyState === "complete") { go(); }
+    else { window.addEventListener("load", go); }
   })();
 
   /* ---- 4) 表紙パララックス（PCのみ・スクロールで文字がゆっくり退く） ---- */
@@ -766,6 +775,7 @@ var MRCL_FORM = {
   function remove() {
     if (op && op.parentNode) op.parentNode.removeChild(op);
     document.body.classList.remove("is-opening");
+    try { document.dispatchEvent(new CustomEvent("mrcl:opening-done")); } catch (e) {}
   }
   if (reduce || seen) { remove(); return; }
   try { sessionStorage.setItem("mrclOpening", "1"); } catch (e) {}
@@ -803,4 +813,40 @@ var MRCL_FORM = {
   window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" || e.key === "Enter" || e.key === " ") finish();
   });
+})();
+
+/* =========================================================
+   v13 サービス一覧タブ（個人／法人）
+   ========================================================= */
+(function () {
+  "use strict";
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".aud-tab"));
+  if (!tabs.length) return;
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+
+  function select(idx, focus) {
+    tabs.forEach(function (t, i) {
+      var on = i === idx;
+      t.classList.toggle("is-active", on);
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (panels[i]) panels[i].hidden = !on;
+    });
+    if (focus && tabs[idx]) tabs[idx].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.tabIndex = t.classList.contains("is-active") ? 0 : -1;
+    t.addEventListener("click", function () { select(i); });
+    t.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      select((i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+    });
+  });
+
+  /* 法人CTA等から #services?type=corporate 相当で来た場合は法人タブを開く */
+  try {
+    var q = new URLSearchParams(location.search).get("type");
+    if (q === "corporate" || location.hash === "#corporate") select(1);
+  } catch (e) {}
 })();

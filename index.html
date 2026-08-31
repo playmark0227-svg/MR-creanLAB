@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=20260830d">
+  <link rel="stylesheet" href="css/style.css?v=20260830f">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"LocalBusiness","name":"株式会社MR.クリーンラボ","image":"https://playmark0227-svg.github.io/MR-creanLAB/images/cover.png","url":"https://playmark0227-svg.github.io/MR-creanLAB/","telephone":"011-252-7865","address":{"@type":"PostalAddress","postalCode":"062-0035","addressRegion":"北海道","addressLocality":"札幌市豊平区","streetAddress":"西岡五条13丁目1番20号","addressCountry":"JP"},"areaServed":["札幌市","函館市","旭川市","帯広市","釧路市"],"openingHours":"Mo-Sa 09:00-18:00"}
   </script>
@@ -58,7 +58,7 @@
         </g>
         <defs><linearGradient id="opGrad" x1="0" y1="0" x2="1000" y2="707" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5FB0E8"/><stop offset="1" stop-color="#0E3480"/></linearGradient></defs>
       </svg>
-      <img class="opening__logo" src="images/logo-mark.png?v=20260830d" alt="" width="900" height="636" fetchpriority="high">
+      <img class="opening__logo" src="images/logo-mark.png?v=20260830f" alt="" width="900" height="636" fetchpriority="high">
     </div>
     <button class="opening__skip" type="button" id="opening-skip">スキップ</button>
   </div>
@@ -131,6 +131,131 @@
     </div>
   </div>
 
+  <!-- ===== サービス一覧（アイコン／個人・法人の切替） ===== -->
+  <section class="section svc-list" id="services">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="section-title">できること<span class="accent">一覧</span></h2>
+        <p class="section-lead">害虫害獣から水まわり、建物・住まいまで。気になるものが一つでもあれば、まとめてご相談いただけます。</p>
+      </div>
+
+      <div class="aud-tabs" role="tablist" aria-label="お客様の種別">
+        <button class="aud-tab is-active" role="tab" id="tab-personal" aria-controls="panel-personal" aria-selected="true" type="button">
+          <span class="aud-tab__m">個人のお客様</span><span class="aud-tab__s">ご家庭・お住まい</span>
+        </button>
+        <button class="aud-tab" role="tab" id="tab-corporate" aria-controls="panel-corporate" aria-selected="false" type="button">
+          <span class="aud-tab__m">法人・事業者様</span><span class="aud-tab__s">店舗・施設・工場</span>
+        </button>
+      </div>
+
+      <div class="aud-panel" id="panel-personal" role="tabpanel" aria-labelledby="tab-personal">
+        <div class="svc-ic-grid">
+          <a class="svc-ic" href="pest-control.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M12 7.5V4M9.5 5 7 3M14.5 5 17 3M7 12H3M7 16H3M17 12h4M17 16h4M12 9v10"/></svg></span>
+            <span class="svc-ic__t">害虫の駆除</span>
+            <span class="svc-ic__d">ゴキブリ・ムカデ・クモ等</span>
+          </a>
+          <a class="svc-ic" href="pest-control.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="11" cy="14" rx="6.5" ry="4.8"/><circle cx="5.5" cy="10.5" r="2.6"/><circle cx="4.6" cy="9.8" r=".7" fill="currentColor" stroke="none"/><path d="M17.5 15.5c2 0 3 1.4 3 3"/></svg></span>
+            <span class="svc-ic__t">ネズミ・害獣駆除</span>
+            <span class="svc-ic__d">侵入経路の封鎖まで</span>
+          </a>
+          <a class="svc-ic" href="pest-control.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="15" rx="4" ry="5.5"/><path d="M8 13.5h8M8 16.5h8"/><circle cx="12" cy="7.5" r="2.4"/><path d="M9.6 6 5.5 3.8M14.4 6l4.1-2.2"/></svg></span>
+            <span class="svc-ic__t">ハチの巣駆除</span>
+            <span class="svc-ic__d">スズメバチ・アシナガバチ</span>
+          </a>
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v9a5 5 0 0 0 5 5h4"/><path d="M4.5 3h5M16 14l3.5 3-3.5 3"/></svg></span>
+            <span class="svc-ic__t">排水管の高圧洗浄</span>
+            <span class="svc-ic__d">つまり・悪臭の解消</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/></svg></span>
+            <span class="svc-ic__t">ハウスクリーニング</span>
+            <span class="svc-ic__d">水まわり・お部屋まるごと</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="7" rx="2"/><path d="M6 9h12M7 15.5c0 1.5 1 2 1 3.5M12 15.5c0 1.5 1 2 1 3.5M17 15.5c0 1.5 1 2 1 3.5"/></svg></span>
+            <span class="svc-ic__t">エアコンクリーニング</span>
+            <span class="svc-ic__d">内部の分解洗浄</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="1.5"/><path d="M9 3.5v17M3.5 9h5.5M3.5 15h5.5M14.5 8.5h3M14.5 12h3"/></svg></span>
+            <span class="svc-ic__t">クロス張り替え</span>
+            <span class="svc-ic__d">お部屋の印象を一新</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4Z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/></svg></span>
+            <span class="svc-ic__t">クッションフロア張替</span>
+            <span class="svc-ic__d">キズ・汚れをリセット</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="9" width="8.5" height="12" rx="2"/><path d="M11 9V5.5l4-2v6M20 6l-2.2 1M20 10.5l-2.2-.8M20 15l-2.2.6"/></svg></span>
+            <span class="svc-ic__t">消毒・消臭・除菌</span>
+            <span class="svc-ic__d">ペット臭・カビ対策にも</span>
+          </a>
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h6a3 3 0 0 1 3 3v3a3 3 0 0 0 3 3h4"/><path d="M4 5.5v5M20 14.5v5"/></svg></span>
+            <span class="svc-ic__t">水道・トイレの修繕</span>
+            <span class="svc-ic__d">つまり・水漏れに対応</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="aud-panel" id="panel-corporate" role="tabpanel" aria-labelledby="tab-corporate" hidden>
+        <div class="svc-ic-grid">
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="10" height="18" rx="1"/><path d="M14 9h6v12h-6M7 7h4M7 11h4M7 15h4M17 13h1M17 17h1"/></svg></span>
+            <span class="svc-ic__t">建築物環境衛生管理</span>
+            <span class="svc-ic__d">衛生管理をワンストップで</span>
+          </a>
+          <a class="svc-ic" href="pest-control.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4.5-5 3.5 3L15 9l6 5"/><path d="M3 21h18M3 3v18"/></svg></span>
+            <span class="svc-ic__t">防除（モニタリング）</span>
+            <span class="svc-ic__d">発生状況を把握し計画防除</span>
+          </a>
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M9 7v12M15 7v12"/></svg></span>
+            <span class="svc-ic__t">グリーストラップ清掃</span>
+            <span class="svc-ic__d">飲食店・施設の定期保守</span>
+          </a>
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s5 5.4 5 9a5 5 0 0 1-10 0c0-3.6 5-9 5-9Z"/><path d="M9.5 13.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span>
+            <span class="svc-ic__t">貯水槽（受水槽）清掃</span>
+            <span class="svc-ic__d">水質検査もあわせて</span>
+          </a>
+          <a class="svc-ic" href="drainage.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M7 8v8M12 8v8M17 8v8"/></svg></span>
+            <span class="svc-ic__t">ダクト清掃</span>
+            <span class="svc-ic__d">空気環境測定に対応</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5 20.5 9.5 9 21H3v-6Z"/><path d="M12 6l6 6"/></svg></span>
+            <span class="svc-ic__t">定期清掃・美装</span>
+            <span class="svc-ic__d">オフィス・店舗・共用部</span>
+          </a>
+          <a class="svc-ic" href="reform.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 21 19H3Z"/><path d="M12 10v4M12 16.5h.01"/></svg></span>
+            <span class="svc-ic__t">アスベスト調査・除去</span>
+            <span class="svc-ic__d">調査・分析・除去に対応</span>
+          </a>
+          <a class="svc-ic" href="company.html">
+            <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/><path d="M10.5 11v6M13.5 11v6"/></svg></span>
+            <span class="svc-ic__t">産業廃棄物 収集運搬</span>
+            <span class="svc-ic__d">特別管理産業廃棄物も</span>
+          </a>
+        </div>
+        <p class="svc-list__note">定期管理・複数拠点のご相談も承ります。ご要望に合わせて年間プランをご提案します。</p>
+      </div>
+
+      <div class="svc-list__cta">
+        <a class="btn-cta" href="contact.html">無料で相談する<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="tel-inline" href="tel:011-252-7865">&#9742; 011-252-7865</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== お悩み ===== -->
   <section class="section">
     <div class="container">
@@ -173,7 +298,7 @@
         <a class="svc-o reveal" href="pest-control.html">
           <div class="svc-o__media">
             <span class="svc-o__num">01</span>
-            <img src="images/hero-pest.jpg?v=20260830d" alt="害虫害獣 駆除・防除" loading="lazy">
+            <img src="images/hero-pest.jpg?v=20260830f" alt="害虫害獣 駆除・防除" loading="lazy">
             <div class="svc-o__head"><div class="svc-o__en">PEST CONTROL</div><div class="svc-o__title">害虫害獣 駆除・防除</div></div>
           </div>
           <div class="svc-o__body">
@@ -190,7 +315,7 @@
         <a class="svc-o reveal d1" href="drainage.html">
           <div class="svc-o__media">
             <span class="svc-o__num">02</span>
-            <img src="images/hero-drain.jpg?v=20260830d" alt="排水管洗浄・衛生管理" loading="lazy">
+            <img src="images/hero-drain.jpg?v=20260830f" alt="排水管洗浄・衛生管理" loading="lazy">
             <div class="svc-o__head"><div class="svc-o__en">DRAIN &amp; HYGIENE</div><div class="svc-o__title">排水管洗浄・衛生管理</div></div>
           </div>
           <div class="svc-o__body">
@@ -207,7 +332,7 @@
         <a class="svc-o reveal d2" href="reform.html">
           <div class="svc-o__media">
             <span class="svc-o__num">03</span>
-            <img src="images/hero-reform.jpg?v=20260830d" alt="リフォーム・ハウスクリーニング" loading="lazy">
+            <img src="images/hero-reform.jpg?v=20260830f" alt="リフォーム・ハウスクリーニング" loading="lazy">
             <div class="svc-o__head"><div class="svc-o__en">REFORM &amp; CLEANING</div><div class="svc-o__title">リフォーム・ハウスクリーニング</div></div>
           </div>
           <div class="svc-o__body">
@@ -302,7 +427,7 @@
   </section>
 
   <!-- ===== 中間CTA（写真） ===== -->
-  <section class="cta-photo" style="background-image:linear-gradient(rgba(13,33,76,.82),rgba(13,33,76,.82)), url('images/hero-reform.jpg?v=20260830d')">
+  <section class="cta-photo" style="background-image:linear-gradient(rgba(13,33,76,.82),rgba(13,33,76,.82)), url('images/hero-reform.jpg?v=20260830f')">
     <h2>まずは無料で、現地調査・お見積りから。</h2>
     <p>ご相談・お見積り・現地調査はすべて無料。最短即日で、専任のプロが診断にお伺いします。</p>
     <div class="actions">
@@ -434,6 +559,6 @@
     <a class="req" href="contact.html">無料で相談する</a>
   </div>
   <a class="pagetop" href="#" aria-label="ページ上部へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
-  <script src="js/main.js?v=20260830d" defer></script>
+  <script src="js/main.js?v=20260830f" defer></script>
 </body>
 </html>
