@@ -1647,3 +1647,38 @@ html:not(.js) .preloader{ display:none !important; }
 .form-status.is-error{ color:#b3261e; }
 .form-status.is-ok{ color:#116b3a; }
 .form.is-sending button[type="submit"]{ opacity:.6; pointer-events:none; }
+
+/* =========================================================
+   v12 オープニング（ロゴ一筆書き → TOPへ）
+   ========================================================= */
+.opening{
+  position:fixed; inset:0; z-index:10000; display:grid; place-items:center;
+  background:#fff;   /* ロゴ画像の地色と揃え、塗り表示時に矩形が出ないようにする */
+}
+.opening__stage{ position:relative; width:min(74vw, 520px); aspect-ratio:1000/706.7; }
+.opening__draw, .opening__logo{ position:absolute; inset:0; width:100%; height:100%; }
+.opening__draw{ overflow:visible; transition:opacity .5s ease; }
+.opening__logo{ opacity:0; object-fit:contain; transition:opacity .6s ease; }
+.od{ stroke-dasharray:var(--len,1200); stroke-dashoffset:var(--len,1200); }
+.opening.is-run .od{ animation:op-draw var(--t,.6s) cubic-bezier(.42,.02,.24,1) var(--d,0s) forwards; }
+@keyframes op-draw{ to{ stroke-dashoffset:0; } }
+.opening.is-fill .opening__draw{ opacity:0; }
+.opening.is-fill .opening__logo{ opacity:1; }
+.opening.is-out{
+  opacity:0; visibility:hidden; transform:scale(1.05);
+  transition:opacity .7s ease, transform 1s ease, visibility 0s linear .7s;
+}
+.opening__skip{
+  position:absolute; right:clamp(14px,3vw,30px); bottom:clamp(14px,3vw,30px);
+  background:rgba(255,255,255,.7); border:1px solid #cfd9e8; color:#5a6b86;
+  border-radius:30px; padding:9px 20px; font-size:13px; font-weight:700; cursor:pointer;
+  transition:background .2s ease, color .2s ease, border-color .2s ease;
+}
+.opening__skip:hover{ background:#fff; color:var(--color-navy); border-color:var(--color-blue); }
+.opening__skip:focus-visible{ outline:3px solid var(--color-blue); outline-offset:2px; }
+body.is-opening{ overflow:hidden; }
+/* JS無効／JS不達でも必ず退場する保険 */
+html:not(.js) .opening{ display:none !important; }
+.opening{ animation:op-failsafe .01s linear 8s forwards; }
+@keyframes op-failsafe{ to{ opacity:0; visibility:hidden; pointer-events:none; } }
+@media (prefers-reduced-motion: reduce){ .opening{ display:none !important; } }

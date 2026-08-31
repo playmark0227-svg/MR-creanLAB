@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260830a";
+  var VER = "?v=20260830d";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -746,5 +746,61 @@ var MRCL_FORM = {
     }).then(function () {
       form.classList.remove("is-sending");
     });
+  });
+})();
+
+/* =========================================================
+   v12 オープニング（ロゴ一筆書き → TOPへ）
+   - 1セッションに1回のみ／スキップ可／reduced-motionでは再生しない
+   - JS不達時はCSS側のフェイルセーフで必ず退場
+   ========================================================= */
+(function () {
+  "use strict";
+  var op = document.getElementById("opening");
+  if (!op) return;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var seen = false;
+  try { seen = sessionStorage.getItem("mrclOpening") === "1"; } catch (e) {}
+
+  function remove() {
+    if (op && op.parentNode) op.parentNode.removeChild(op);
+    document.body.classList.remove("is-opening");
+  }
+  if (reduce || seen) { remove(); return; }
+  try { sessionStorage.setItem("mrclOpening", "1"); } catch (e) {}
+
+  document.body.classList.add("is-opening");
+  var pl = document.getElementById("preloader");   /* 二重表示を防ぐ */
+  if (pl && pl.parentNode) pl.parentNode.removeChild(pl);
+
+  /* 各パスの長さを実測して dash アニメを成立させる */
+  var end = 0;
+  op.querySelectorAll(".od").forEach(function (p) {
+    var L = 1200;
+    try { L = p.getTotalLength() || 1200; } catch (e) {}
+    p.style.setProperty("--len", L.toFixed(1));
+    var cs = getComputedStyle(p);
+    var d = parseFloat(cs.getPropertyValue("--d")) || 0;
+    var t = parseFloat(cs.getPropertyValue("--t")) || 0.6;
+    if (d + t > end) end = d + t;
+  });
+
+  var timers = [];
+  function finish() {
+    timers.forEach(clearTimeout); timers = [];
+    op.classList.add("is-out");
+    timers.push(setTimeout(remove, 900));
+  }
+
+  requestAnimationFrame(function () { op.classList.add("is-run"); });
+  timers.push(setTimeout(function () { op.classList.add("is-fill"); }, (end + 0.12) * 1000));
+  timers.push(setTimeout(finish, (end + 1.15) * 1000));
+
+  var skip = document.getElementById("opening-skip");
+  if (skip) skip.addEventListener("click", function (e) { e.stopPropagation(); finish(); });
+  op.addEventListener("click", finish);
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Enter" || e.key === " ") finish();
   });
 })();
