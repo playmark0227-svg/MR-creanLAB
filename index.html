@@ -135,11 +135,11 @@
   <section class="section svc-list" id="services">
     <div class="container">
       <div class="sec-head">
-        <h2 class="section-title">できること<span class="accent">一覧</span></h2>
-        <p class="section-lead">害虫害獣から水まわり、建物・住まいまで。気になるものが一つでもあれば、まとめてご相談いただけます。</p>
+        <h2 class="section-title">お客様別<span class="accent">サービス一覧</span></h2>
+        <p class="section-lead">ご家庭のお困りごとから、店舗・施設・工場の定期衛生管理まで。お客様の種別を選んで、対応サービスをご覧ください。</p>
       </div>
 
-      <div class="aud-tabs" role="tablist" aria-label="お客様の種別">
+      <div class="aud-tabs" role="tablist" aria-label="お客様の種別" aria-orientation="horizontal">
         <button class="aud-tab is-active" role="tab" id="tab-personal" aria-controls="panel-personal" aria-selected="true" type="button">
           <span class="aud-tab__m">個人のお客様</span><span class="aud-tab__s">ご家庭・お住まい</span>
         </button>
@@ -148,7 +148,7 @@
         </button>
       </div>
 
-      <div class="aud-panel" id="panel-personal" role="tabpanel" aria-labelledby="tab-personal">
+      <div class="aud-panel" id="panel-personal" role="tabpanel" aria-labelledby="tab-personal" data-label="個人のお客様向けサービス">
         <div class="svc-ic-grid">
           <a class="svc-ic" href="pest-control.html">
             <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M12 7.5V4M9.5 5 7 3M14.5 5 17 3M7 12H3M7 16H3M17 12h4M17 16h4M12 9v10"/></svg></span>
@@ -203,7 +203,7 @@
         </div>
       </div>
 
-      <div class="aud-panel" id="panel-corporate" role="tabpanel" aria-labelledby="tab-corporate" hidden>
+      <div class="aud-panel" id="panel-corporate" role="tabpanel" aria-labelledby="tab-corporate" data-label="法人・事業者様向けサービス" hidden>
         <div class="svc-ic-grid">
           <a class="svc-ic" href="drainage.html">
             <span class="svc-ic__i" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="10" height="18" rx="1"/><path d="M14 9h6v12h-6M7 7h4M7 11h4M7 15h4M17 13h1M17 17h1"/></svg></span>

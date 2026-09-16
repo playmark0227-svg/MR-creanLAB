@@ -838,9 +838,14 @@ var MRCL_FORM = {
     t.tabIndex = t.classList.contains("is-active") ? 0 : -1;
     t.addEventListener("click", function () { select(i); });
     t.addEventListener("keydown", function (e) {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var next = null;
+      if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+      if (e.key === "ArrowLeft") next = (i + tabs.length - 1) % tabs.length;
+      if (e.key === "Home") next = 0;
+      if (e.key === "End") next = tabs.length - 1;
+      if (next === null) return;
       e.preventDefault();
-      select((i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+      select(next, true);
     });
   });
 
