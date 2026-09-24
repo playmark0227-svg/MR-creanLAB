@@ -8,19 +8,25 @@
   <script>document.documentElement.className+=' js';</script>
   <link rel="canonical" href="https://playmark0227-svg.github.io/MR-creanLAB/news.html">
   <meta name="theme-color" content="#16357a">
-  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="images/logo-mark.svg?v=20260924a" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="株式会社MR.クリーンラボ">
   <meta property="og:title" content="お知らせ｜株式会社MR.クリーンラボ">
   <meta property="og:description" content="株式会社MR.クリーンラボからのお知らせ・最新情報・トピックス。">
   <meta property="og:url" content="https://playmark0227-svg.github.io/MR-creanLAB/news.html">
-  <meta property="og:image" content="https://playmark0227-svg.github.io/MR-creanLAB/images/cover.png">
+  <meta property="og:image" content="https://playmark0227-svg.github.io/MR-creanLAB/images/ogp.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MR.Clean Lab｜住まいと店舗を、まるごと清潔に。">
+  <meta name="twitter:image" content="https://playmark0227-svg.github.io/MR-creanLAB/images/ogp.jpg">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=20260830f">
+  <link rel="stylesheet" href="css/style.css?v=20260924a">
 </head>
 <body>
   <a class="skip-link" href="#main">本文へスキップ</a>
@@ -28,7 +34,7 @@
   <!-- ===== ローディング画面 ===== -->
   <div class="preloader" id="preloader" role="status" aria-label="読み込み中">
     <div class="preloader__inner">
-      <img class="preloader__logo" src="images/logo.svg" alt="MR.Clean Lab" onerror="this.remove()">
+      <img class="preloader__logo" src="images/logo.svg?v=20260924a" alt="MR.Clean Lab" onerror="this.remove()">
       <div class="preloader__bar"><span></span></div>
     </div>
   </div>
@@ -38,7 +44,7 @@
   <header class="site-header">
     <div class="container header-top">
       <a class="logo" href="index.html">
-        <img class="logo-img" src="images/logo.svg" alt="MR.Clean Lab" onerror="this.closest('.logo').classList.add('no-img');this.remove()">
+        <img class="logo-img" src="images/logo.svg?v=20260924a" alt="MR.Clean Lab" onerror="this.closest('.logo').classList.add('no-img');this.remove()">
         <span class="logo-mark">MR</span>
         <span class="logo-text">MR.Clean Lab</span>
       </a>
@@ -69,20 +75,65 @@
     <h1 class="ja">お知らせ</h1>
   </section>
 
-  <!-- ===== お知らせ一覧 ===== -->
+  <!-- ===== お知らせ一覧 =====
+       ★新しい記事を追加するときは、下の「news-grid」の一番上に
+         <article class="news-card"> 〜 </article> のまとまりを1つコピーして貼り付け、
+         リンク先・画像・カテゴリ・日付・タイトル・要約を書き換えてください。
+         手順の詳細は news/README.md にあります。 -->
   <section class="section">
     <div class="container">
-      <p class="section-lead">最新情報・トピックス</p>
-      <ul class="news-list">
-        <li><time datetime="2026-08-30">2026年8月30日</time><span>ホームページをリニューアルしました</span></li>
-        <li><time datetime="2024-10-06">2024年10月6日</time><span>エアコン清掃は、冷房から暖房に切り替わる前に！（札幌・札幌近郊承ります）</span></li>
-        <li><time datetime="2024-07-02">2024年7月2日</time><span>ハチの駆除、承ります</span></li>
-        <li><time datetime="2024-03-07">2024年3月7日</time><span>サイトリニューアルにつきまして</span></li>
-      </ul>
+      <p class="section-lead">最新情報・季節のご案内・施工事例などをお届けします。</p>
+      <div class="news-filter" role="group" aria-label="カテゴリで絞り込み" hidden></div>
+      <div class="news-grid">
+        <article class="news-card" data-cat="info">
+          <a class="news-card__link" href="news/2026-08-30-renewal.html">
+            <div class="news-card__img"><img src="images/news/2026-08-30-renewal.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="news-tag" data-cat="info">お知らせ</span><time datetime="2026-08-30">2026.08.30</time></div>
+              <h2 class="news-card__title">ホームページをリニューアルしました</h2>
+              <p class="news-card__excerpt">ホームページをリニューアルいたしました。個人・法人のお客様別にサービスを探しやすくなり、スマートフォンでも見やすくなりました。</p>
+              <span class="news-card__more" aria-hidden="true">続きを読む<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        </article>
+        <article class="news-card" data-cat="season">
+          <a class="news-card__link" href="news/2024-10-06-aircon.html">
+            <div class="news-card__img"><img src="images/news/2024-10-06-aircon.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="news-tag" data-cat="season">季節のご案内</span><time datetime="2024-10-06">2024.10.06</time></div>
+              <h2 class="news-card__title">エアコン清掃は、冷房から暖房に切り替わる前に！（札幌・札幌近郊承ります）</h2>
+              <p class="news-card__excerpt">冷房シーズンを終えたエアコン内部には、ホコリや湿気がたまりがち。本格的に暖房を使い始める前のお手入れがおすすめです。</p>
+              <span class="news-card__more" aria-hidden="true">続きを読む<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        </article>
+        <article class="news-card" data-cat="pest">
+          <a class="news-card__link" href="news/2024-07-02-hachi.html">
+            <div class="news-card__img"><img src="images/news/2024-07-02-hachi.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="news-tag" data-cat="pest">害虫害獣</span><time datetime="2024-07-02">2024.07.02</time></div>
+              <h2 class="news-card__title">ハチの駆除、承ります</h2>
+              <p class="news-card__excerpt">夏から秋はハチの活動が活発になる季節です。軒下や庭木などに巣を見つけたら、無理に近づかずご相談ください。</p>
+              <span class="news-card__more" aria-hidden="true">続きを読む<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        </article>
+        <article class="news-card" data-cat="info">
+          <a class="news-card__link" href="news/2024-03-07-renewal.html">
+            <div class="news-card__img"><img src="images/news/2024-03-07-renewal.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async"></div>
+            <div class="news-card__body">
+              <div class="news-card__meta"><span class="news-tag" data-cat="info">お知らせ</span><time datetime="2024-03-07">2024.03.07</time></div>
+              <h2 class="news-card__title">サイトリニューアルにつきまして</h2>
+              <p class="news-card__excerpt">当社ホームページをリニューアルいたしました。サービス内容やお知らせを随時掲載してまいります。</p>
+              <span class="news-card__more" aria-hidden="true">続きを読む<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </div>
+          </a>
+        </article>
+      </div>
+      <p class="news-empty" hidden>該当するお知らせはありません。</p>
     </div>
   </section>
 
-  <!-- ===== フッター（全ページ共通） ===== -->
   </main>
 
   <footer class="site-footer">
@@ -120,7 +171,7 @@
     <a class="req" href="contact.html">無料で相談する</a>
   </div>
   <a class="pagetop" href="#" aria-label="ページ上部へ戻る"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
-  <script src="js/main.js?v=20260830f" defer></script>
+  <script src="js/main.js?v=20260924a" defer></script>
 
 </body>
 </html>

@@ -198,7 +198,7 @@ var MRCL_ANIM = {
   if (!baseImg) return;
   if (frame.classList.contains("has-slideshow")) return;
 
-  var VER = "?v=20260830f";
+  var VER = "?v=20260924a";
   /* slide2〜4（顔入り実画像）。pos = object-position（x=スマホ横位置 / y=PC縦位置） */
   var SLIDES = [
     { src: "images/cover-2.jpg" + VER, alt: "住まいを点検する害虫害獣防除のスタッフ", pos: "74% 28%" },
@@ -854,4 +854,42 @@ var MRCL_FORM = {
     var q = new URLSearchParams(location.search).get("type");
     if (q === "corporate" || location.hash === "#corporate") select(1);
   } catch (e) {}
+})();
+
+/* =========================================================
+   v14 お知らせ：カテゴリ絞り込み（カードの data-cat から自動生成）
+   ========================================================= */
+(function () {
+  "use strict";
+  var bar = document.querySelector(".news-filter");
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".news-card[data-cat]"));
+  if (!bar || cards.length < 2) return;
+  var empty = document.querySelector(".news-empty");
+  var labels = {};
+  cards.forEach(function (c) {
+    var tag = c.querySelector(".news-tag");
+    labels[c.getAttribute("data-cat")] = tag ? tag.textContent.trim() : c.getAttribute("data-cat");
+  });
+  var keys = Object.keys(labels);
+  if (keys.length < 2) return;                 /* カテゴリが1種類なら表示しない */
+  var buttons = [];
+  function make(key, text) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = text; b.setAttribute("data-key", key);
+    b.setAttribute("aria-pressed", key === "all" ? "true" : "false");
+    b.addEventListener("click", function () { apply(key); });
+    bar.appendChild(b); buttons.push(b);
+  }
+  function apply(key) {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var on = key === "all" || c.getAttribute("data-cat") === key;
+      c.hidden = !on; if (on) shown++;
+    });
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-key") === key)); });
+    if (empty) empty.hidden = shown > 0;
+  }
+  make("all", "すべて");
+  keys.forEach(function (k) { make(k, labels[k]); });
+  bar.hidden = false;
 })();
